@@ -1,0 +1,12 @@
+display-paragraph-mode:
+- w UI; porozdzielac ui_main na pojedyncze pliki (te pliki co juz zrobione sa) - kazdy plik opisuje dany jeden element 
+- złożyć (zaimportowac) wszystkie elementy spowrotem w ui_main tak żeby działalo elegancko
+- dodac zakończenie pisania jak user napisze caly tekst
+- pobawic się z troche innym podejsciem do pisania, np że user może pisac złe znaki (bo aktualnie nie może), wtedy ma czerwony tekst i musi poprawic aż będzie znowu zielony
+
+floating-words-mode:
+- dodac input entry na dole apki gdzie user może se wpisywac rzeczy (wystarczy do jednego trybu narazie), 
+- zczytywanie danych z input entry na bierząco, moze byc printowane do terminala po prostu
+- napisac ten kod bardziej czytelnie bo ciężary są tera
+- robic funkcjonalnosc powoli, zczytywanie czy slowo ktore pisze user pokrywa sie w ostatnim (albo z jakimkolwiek, ale to dużo cięższe) słowem na ekranie, jeśli tak to słowo znika
+  (albo znika samo, albo po tym jak user wcisnie enter, to sie zobaczy jeszcze jak bedzie dzialac)
