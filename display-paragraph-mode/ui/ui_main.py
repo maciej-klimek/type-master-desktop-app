@@ -1,5 +1,9 @@
 import random
 import customtkinter as ctk
+from input_entry import InputLabel
+from reset_button import ResetButton
+from speed_label import SpeedLabel
+from display_text_label import display_text_label
 
 ctk.set_default_color_theme("green")
 
@@ -15,10 +19,10 @@ class GUI(ctk.CTkFrame):
         bg_color = self.root.cget("bg")
         self.frame = ctk.CTkFrame(self.root, fg_color=bg_color)
 
-        self.create_text_label()
-        self.create_input_textbox()
-        self.create_speed_label()
-        self.create_reset_button()
+        display_text_label(self.frame)
+        InputLabel(self.frame)
+        SpeedLabel(self.frame)
+        ResetButton(self.frame)
 
     def run(self):
         self.frame.pack(expand=True)
@@ -80,3 +84,4 @@ class GUI(ctk.CTkFrame):
         )
         reset_button.pack(side="right", padx=[0, 50])
         self.reset_button = reset_button
+
