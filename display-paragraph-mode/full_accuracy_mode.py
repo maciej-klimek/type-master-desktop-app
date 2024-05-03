@@ -48,7 +48,6 @@ class SentenceTest():
 
         if not self.running:
             self.running = True
-            self.gui.input_textbox.delete("0.0", "end")
             self.writting_thread = threading.Thread(
                 target=self.calculate_stats)
             self.writting_thread.daemon = True
@@ -94,13 +93,13 @@ class SentenceTest():
 
     def on_reset(self, event=None):
         self.get_new_text()
-        self.running = False
         self.current_typing_index = 0
         self.correct_chars_pressed = 0
         self.incorrect_chars_pressed = 0
         self.gui.input_textbox.unbind("<Key>")
-        self.gui.input_textbox.configure(state="normal")
         self.gui.input_textbox.delete("0.0", "end")
+        self.gui.input_textbox.configure(text_color="white")
+
         # print("reset")
 
     def on_closing(self):
