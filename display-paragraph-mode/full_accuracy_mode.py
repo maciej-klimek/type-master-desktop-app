@@ -54,8 +54,14 @@ class SentenceTest():
             self.writting_thread.daemon = True
             self.writting_thread.start()
 
+        print(f"Correct text: {self.correct_text}\nTyped text: {
+              self.gui.input_textbox.get("0.0", "end")}")
+
+        print(f"Expected char: {
+              self.correct_text[self.current_typing_index]}   |   ", end="")
+
         if typed_char == self.correct_text[self.current_typing_index]:
-            # print("correct char pressed")
+            print(f"Correct char pressed: {typed_char}")
             self.gui.input_textbox.configure(text_color="#71c788")
             self.current_typing_index += 1
             self.correct_chars_pressed += 1
@@ -65,7 +71,7 @@ class SentenceTest():
                 self.gui.input_textbox.unbind("<KeyPress>")
                 self.gui.input_textbox.configure(state="disabled")
         else:
-            # print("incorrect char pressed")
+            print(f"Incorrect char pressed: {typed_char}")
             self.incorrect_chars_pressed += 1
             self.gui.input_textbox.configure(text_color="#ab5555")
             return "break"
@@ -84,7 +90,7 @@ class SentenceTest():
                 accuracy = 0
             self.gui.speed_label.configure(
                 text=f"Accuracy: {accuracy:.2f}%\nCPS: {cps:.2f}\nCPM: {cpm:.2f}")
-        print("time_thread ended")
+        # print("time_thread ended")
 
     def on_reset(self, event=None):
         self.get_new_text()
@@ -92,14 +98,15 @@ class SentenceTest():
         self.current_typing_index = 0
         self.correct_chars_pressed = 0
         self.incorrect_chars_pressed = 0
+        self.gui.input_textbox.unbind("<Key>")
         self.gui.input_textbox.configure(state="normal")
-        self.gui.input_textbox.delete("1.0", "end")
-        print("reset")
+        self.gui.input_textbox.delete("0.0", "end")
+        # print("reset")
 
     def on_closing(self):
         self.running = False
         self.gui.root.destroy()
-        print("closing")
+        # print("closing")
 
 
 if __name__ == "__main__":
