@@ -1,5 +1,9 @@
 import threading
 from ui.ui_main import GUI
+from ui.text_label import TextLabel
+from ui.input_textbox import InputTextbox
+from ui.speed_label import SpeedLabel
+from ui.reset_button import ResetButton
 import time
 import random
 
@@ -15,7 +19,8 @@ class SentenceTest():
 
         self.get_new_text()
 
-        self.gui.input_textbox.bind("<Return>", self.on_start)
+        self.gui.input_textbox.bind("<Button-1>", self.on_start)
+
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
         self.gui.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
@@ -43,7 +48,7 @@ class SentenceTest():
 
         if not self.running:
             self.running = True
-            self.gui.input_textbox.delete("1.0", "end")
+            self.gui.input_textbox.delete("0.0", "end")
             self.writting_thread = threading.Thread(
                 target=self.calculate_stats)
             self.writting_thread.daemon = True
