@@ -1,17 +1,19 @@
 import threading
-from ui.ui_main import GUI
-from ui.text_label import TextLabel
-from ui.input_textbox import InputTextbox
-from ui.speed_label import SpeedLabel
-from ui.reset_button import ResetButton
-import time
+import logging
 import random
+import time
+from ui.ui_main import GUI
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
 
-class SentenceTest():
+class FullAccuracyMode():
     def __init__(self):
 
+        self.logger = logging.getLogger(__name__)
         self.gui = GUI()
+
         self.running = False
         self.correct_chars_pressed = 0
         self.incorrect_chars_pressed = 0
@@ -20,7 +22,6 @@ class SentenceTest():
         self.get_new_text()
 
         self.gui.input_textbox.bind("<Button-1>", self.on_start)
-
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
         self.gui.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
@@ -37,13 +38,9 @@ class SentenceTest():
     def on_start(self, event=None):
         self.gui.input_textbox.bind("<Key>", self.on_key_press)
         self.gui.text_label.configure(text=self.correct_text)
+        self.logger.debug("start")
 
     def on_key_press(self, event):
-        # print("on_key_press")
-
-        if event.keysym.lower() == "shift_l" or event.keysym.lower() == "shift_r":
-            return
-
         typed_char = event.char
 
         if not self.running:
@@ -53,14 +50,15 @@ class SentenceTest():
             self.writting_thread.daemon = True
             self.writting_thread.start()
 
-        print(f"Correct text: {self.correct_text}\nTyped text: {
-              self.gui.input_textbox.get("0.0", "end")}")
+        # DEBUG
+        # self.logger.debug("Correct text: %s\nTyped text: %s",
+        #                   self.correct_text, self.gui.input_textbox.get("0.0", "end"))
 
-        print(f"Expected char: {
-              self.correct_text[self.current_typing_index]}   |   ", end="")
+        # self.logger.debug("Expected char: %s",
+        #                   self.correct_text[self.current_typing_index])
 
         if typed_char == self.correct_text[self.current_typing_index]:
-            print(f"Correct char pressed: {typed_char}")
+            # self.logger.debug("Correct char pressed: %s", typed_char)
             self.gui.input_textbox.configure(text_color="#71c788")
             self.current_typing_index += 1
             self.correct_chars_pressed += 1
@@ -70,7 +68,7 @@ class SentenceTest():
                 self.gui.input_textbox.unbind("<KeyPress>")
                 self.gui.input_textbox.configure(state="disabled")
         else:
-            print(f"Incorrect char pressed: {typed_char}")
+            # self.logger.debug("Incorrect char pressed: %s", typed_char)
             self.incorrect_chars_pressed += 1
             self.gui.input_textbox.configure(text_color="#ab5555")
             return "break"
@@ -89,7 +87,6 @@ class SentenceTest():
                 accuracy = 0
             self.gui.speed_label.configure(
                 text=f"Accuracy: {accuracy:.2f}%\nCPS: {cps:.2f}\nCPM: {cpm:.2f}")
-        # print("time_thread ended")
 
     def on_reset(self, event=None):
         self.get_new_text()
@@ -99,14 +96,13 @@ class SentenceTest():
         self.gui.input_textbox.unbind("<Key>")
         self.gui.input_textbox.delete("0.0", "end")
         self.gui.input_textbox.configure(text_color="white")
-
-        # print("reset")
+        self.logger.debug("reset")
 
     def on_closing(self):
         self.running = False
         self.gui.root.destroy()
-        # print("closing")
+        self.logger.debug("closing")
 
 
 if __name__ == "__main__":
-    SentenceTest()
+    FullAccuracyMode()
