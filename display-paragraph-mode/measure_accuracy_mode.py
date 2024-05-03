@@ -7,17 +7,25 @@ from ui.ui_main import GUI
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+SPECIAL_KEYS = {
+    "Shift_L": "Left Shift",
+    "Shift_R": "Right Shift",
+    "Control_L": "Left Ctrl",
+    "Control_R": "Right Ctrl",
+    "Alt_L": "Left Alt",
+    "Alt_R": "Right Alt",
+    "Caps_Lock": "Caps Lock"
+}
 
-class FullAccuracyMode():
+
+class MeasureAccuracyMode():
     def __init__(self):
 
         self.logger = logging.getLogger(__name__)
         self.gui = GUI()
 
         self.running = False
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
-        self.current_typing_index = 0
+        self.chars_typed = 0
 
         self.get_new_text()
 
@@ -40,9 +48,6 @@ class FullAccuracyMode():
         self.gui.text_label.configure(text=self.correct_text)
         self.logger.debug("start")
 
-    def on_key_press(self, event):
-        typed_char = event.char
-
         if not self.running:
             self.running = True
             self.writting_thread = threading.Thread(
@@ -50,49 +55,40 @@ class FullAccuracyMode():
             self.writting_thread.daemon = True
             self.writting_thread.start()
 
-        # DEBUG
-        # self.logger.debug("Correct text: %s\nTyped text: %s",
-        #                   self.correct_text, self.gui.input_textbox.get("0.0", "end"))
+    def on_key_press(self, event):
+        key_code = event.keysym
+        if key_code == "Return":
+            self.running = False
+            self.gui.input_textbox.unbind("<KeyPress>")
+            self.gui.input_textbox.configure(state="disabled")
+            self.logger.debug("enter pressed")
+        elif key_code == "BackSpace":
+            self.logger.debug("backspace pressed")
+            if self.chars_typed > 0:
+                self.chars_typed -= 1
+                self.logger.debug("backspace pressed and deleted a char")
 
-        # self.logger.debug("Expected char: %s",
-        #                   self.correct_text[self.current_typing_index])
+        elif key_code in SPECIAL_KEYS:
+            self.logger.debug("special key pressed")
 
-        if typed_char == self.correct_text[self.current_typing_index]:
-            # self.logger.debug("Correct char pressed: %s", typed_char)
-            self.gui.input_textbox.configure(text_color="#71c788")
-            self.current_typing_index += 1
-            self.correct_chars_typed += 1
-
-            if self.current_typing_index >= len(self.correct_text):
-                self.running = False
-                self.gui.input_textbox.unbind("<KeyPress>")
-                self.gui.input_textbox.configure(state="disabled")
         else:
-            # self.logger.debug("Incorrect char pressed: %s", typed_char)
-            self.incorrect_chars_typed += 1
-            self.gui.input_textbox.configure(text_color="#ab5555")
-            return "break"
+            self.chars_typed += 1
+
+        self.logger.debug(self.chars_typed)
 
     def calculate_stats(self):
         counter = 0
         while self.running:
             time.sleep(0.05)
             counter += 0.1
-            cps = self.current_typing_index / counter
+            cps = self.chars_typed / counter
             cpm = cps * 60
-            if self.correct_chars_typed != 0 and self.incorrect_chars_typed != 0:
-                accuracy = 100 * self.correct_chars_typed / \
-                    (self.correct_chars_typed + self.incorrect_chars_typed)
-            else:
-                accuracy = 0
             self.gui.speed_label.configure(
-                text=f"Accuracy: {accuracy:.2f}%\nCPS: {cps:.2f}\nCPM: {cpm:.2f}")
+                text=f"CPS: {cps:.2f}\nCPM: {cpm:.2f}")
 
     def on_reset(self, event=None):
         self.get_new_text()
-        self.current_typing_index = 0
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
+        self.chars_typed = 0
         self.gui.input_textbox.unbind("<Key>")
         self.gui.input_textbox.delete("0.0", "end")
         self.gui.input_textbox.configure(text_color="white")
@@ -105,4 +101,4 @@ class FullAccuracyMode():
 
 
 if __name__ == "__main__":
-    FullAccuracyMode()
+    MeasureAccuracyMode()
