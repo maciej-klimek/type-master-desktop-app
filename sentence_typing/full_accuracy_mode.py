@@ -2,7 +2,7 @@ import threading
 import logging
 import random
 import time
-from ui.ui_main import GUI
+from gui.gui_main import GUI
 
 logging.basicConfig(level=logging.DEBUG)
 
