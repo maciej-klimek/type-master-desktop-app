@@ -1,0 +1,31 @@
+SENTENCE-TYPING:
+  - głowne gui w ktorym user wybiera sobie ktory tryb chce odpalic
+  - zamiast zwyklego pliku txt z sentencjami do pisania:
+    - albo baza danych (jak sie uda to jeszcze interface do modyfikowania tej bazy przez usera, dodawanie sentencji itp):
+    - albo prompty do chata i dynamiczne generowanie tych sentencji (to raczej jako ciekawostka nie ma co za dlugo na tym siedziec)
+
+  # do obu modów:
+    - lepsze odpalanie pisania, klikanie myszką w okienko srednie jest
+    - sterowanie gui za pomocą klawiatury zeby nie trzeba bylo klika
+    - mierzenie words per minute w counterze
+
+  # full_accuracy_mode:
+    - potestowac sporo czy nie ma jakis bugow (na pewno jakies sa)
+    - lepsze gui jak bedzie czas i wena
+
+  # measure_accuracy_mode:
+    - sprawdzanie accuracy napisanego tekstu dynamicznie wraz z pisaniem (wbudowana bibliotego do porownywania stringow jest, trza obczaic)
+    - dynamiczna zmiana kolorku (albo tekstu albo stat countera) w zaleznosci od poziomu accuracy
+
+
+###
+imo lepiej jak zaczniesz wlasnie word-typing sb dłubać a ja powoli sobie dokoncze to sentence-typing, 
+obczaj sobie też jak zrobilem gui, imo taki model że tworzysz widgety jako instancje rozszerzonych klas najlepiej działa
+###
+
+WORD-TYPING 
+- napisac ten kod bardziej czytelnie bo ciężary są tera (rozdzielic funkcjonalnosc i ui na osobne pliki itp)
+- dodac input entry (albo textbox) na dole apki gdzie user może se wpisywac rzeczy (obojetne to ktorej animacji narazie), 
+- zczytywanie danych z input entry na bierząco, (moze byc printowane do terminala po prostu)
+- robic funkcjonalnosc powoli, zczytywanie czy slowo ktore pisze user pokrywa sie w ostatnim (albo z ktorymkolwiek, ale to dużo cięższe) słowem na ekranie, jeśli tak to słowo znika
+  (albo znika samo, albo po tym jak user wcisnie enter, najlepiej zrobi dwie wersje i potestować)
