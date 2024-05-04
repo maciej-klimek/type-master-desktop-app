@@ -14,8 +14,7 @@ SENTENCE-TYPING:
     - lepsze gui jak bedzie czas i wena
 
   # measure_accuracy_mode:
-    - sprawdzanie accuracy napisanego tekstu dynamicznie wraz z pisaniem (wbudowana bibliotego do porownywania stringow jest, trza obczaic)
-    - dynamiczna zmiana kolorku (albo tekstu albo stat countera) w zaleznosci od poziomu accuracy
+    - kolorowanie liter w zaleznosci czy są dobrze czy zle wpisane
 
 
 ###

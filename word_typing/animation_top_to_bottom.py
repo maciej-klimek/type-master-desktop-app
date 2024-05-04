@@ -12,7 +12,6 @@ def slide_words_through_canvas():
             word_labels.pop(i)  # Remove the label from the list
             break
 
-    # Recursive call with a lower interval for smoother word movement
     canvas.after(1, slide_words_through_canvas)
 
 

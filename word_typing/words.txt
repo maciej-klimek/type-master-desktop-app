@@ -1,7 +1,7 @@
 Artur
 Donos
 Piotr
-Zapiór
+Zapjur
 Martin
 Romper
 Kamil
@@ -9,6 +9,7 @@ Zryt
 Niechaj
 Adam
 Jaworski
-Adrian
+Adi
 Szupan
+Jurson
 Burlingo
