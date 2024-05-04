@@ -29,3 +29,4 @@ WORD-TYPING
 - zczytywanie danych z input entry na bierząco, (moze byc printowane do terminala po prostu)
 - robic funkcjonalnosc powoli, zczytywanie czy slowo ktore pisze user pokrywa sie w ostatnim (albo z ktorymkolwiek, ale to dużo cięższe) słowem na ekranie, jeśli tak to słowo znika
   (albo znika samo, albo po tym jak user wcisnie enter, najlepiej zrobi dwie wersje i potestować)
+- dodanie jakiegokolwiek mierzenia statystyk, jak sie bardziej wyklaruje obraz to będziemy to dokladniej kminic

@@ -12,7 +12,6 @@ def slide_words_through_canvas():
             word_labels.pop(i)  # Remove the label from the list
             break
 
-    # Recursive call with a lower interval for smoother word movement
     canvas.after(1, slide_words_through_canvas)
 
 
@@ -26,14 +25,12 @@ def generate_word():
             generated_words = []
         word = random.choice(word_list)
     generated_words.append(word)
-    # Start words outside the left side of the canvas
     x_pos = random.randint(-500, -100)
     y_pos = random.randint(30, canvas_height - 30)
     word_label = canvas.create_text(x_pos, y_pos, text=word, fill='white', font=(
         'Cascadia mono', font_size), anchor='w')
     word_labels.append(word_label)
     word_positions.append((x_pos, y_pos))
-    # Recursive call to generate words every 500 milliseconds
     canvas.after(1000, generate_word)
 
 
@@ -44,7 +41,6 @@ def read_words(filename):
 
 
 def is_colliding(x1, y1, x2, y2):
-    # Check if two words are colliding
     return abs(x1 - x2) < 100 and abs(y1 - y2) < 30
 
 
