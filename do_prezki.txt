@@ -1,1 +1,6 @@
+- planowanie projektu i taktyki implementacji
 - tworzenie package'y i modulów w pythonie, architektura i struktura projektów
+- logging w pythonie
+- wielowątkowość w pythonie, thready/deamony 
+- customtkinter, nasza implementacja UI (model klasowy)
+- *automatyczne promptowanie chata z poziomu aplikacji
