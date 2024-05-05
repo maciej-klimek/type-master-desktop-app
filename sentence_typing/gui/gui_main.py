@@ -1,10 +1,10 @@
-import customtkinter as ctk
-from .text_label import TextLabel
-from .input_textbox import InputTextbox
-from .speed_label import SpeedLabel
 from .reset_button import ResetButton
+from .speed_label import SpeedLabel
+from .input_textbox import InputTextbox
+from .text_label import TextLabel
+import customtkinter as ctk
 
-ctk.set_default_color_theme("green")
+ctk.set_appearance_mode("Dark")
 
 
 class GUI(ctk.CTkFrame):
