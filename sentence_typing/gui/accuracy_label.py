@@ -1,16 +1,15 @@
 import customtkinter as ctk
 
 
-class SpeedLabel(ctk.CTkLabel):
+class AccuracyLabel(ctk.CTkLabel):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
-        SpeedLabel.configure(
+        AccuracyLabel.configure(
             self,
-            text="WPM: 0\n CPM: 0\nCPS: 0",
+            text="Accuracy: 0%",
             font=("Ubuntu", 16),
             corner_radius=8,
             justify="left",
-            fg_color="#71c788",
-            text_color="black",
+            text_color="grey80",
         )
-        self.pack(side="left", ipadx=20, ipady=20)
+        self.pack(pady=[5, 30])

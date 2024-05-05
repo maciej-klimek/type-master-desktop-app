@@ -73,7 +73,6 @@ class MeasureAccuracyMode():
             if key_code == "Return":
                 self.running = False
                 self.gui.input_textbox.unbind("<KeyPress>")
-                self.gui.input_textbox.configure(state="disabled")
                 self.logger.debug("enter pressed")
             elif key_code == "BackSpace":
                 self.logger.debug("backspace pressed")
@@ -92,14 +91,18 @@ class MeasureAccuracyMode():
 
     def calculate_stats(self):
         try:
-            counter = 0
+            time_elapsed = 0
             while self.running:
                 time.sleep(0.05)
-                counter += 0.05
-                cps = self.chars_typed / counter
+                time_elapsed += 0.05
+                wpm = 60 * len(self.gui.input_textbox.get(
+                    0.0, "end").split()) / time_elapsed
+                cps = self.chars_typed / time_elapsed
                 cpm = cps * 60
                 self.gui.speed_label.configure(
-                    text=f"Accuracy: {self.accuracy:.2f}%\nCPS: {cps:.2f}\nCPM: {cpm:.2f}")
+                    text=f"WPM: {wpm:.2f}\nCPM: {cpm: .2f}\nCPS: {cps: .2f}")
+                self.gui.accuracy_label.configure(
+                    text=f"Accuracy: {self.accuracy: .2f}%")
         except Exception as e:
             self.logger.error(f"Error calculating stats: {e}")
 
