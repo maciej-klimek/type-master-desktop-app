@@ -5,6 +5,7 @@ from .speed_label import SpeedLabel
 from .reset_button import ResetButton
 
 ctk.set_default_color_theme("green")
+ctk.set_appearance_mode("Dark")
 
 
 class GUI(ctk.CTkFrame):
