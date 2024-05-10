@@ -1,6 +1,7 @@
 from .reset_button import ResetButton
 from .speed_label import SpeedLabel
 from .accuracy_label import AccuracyLabel
+from .time_label import TimeLabel
 from .input_textbox import InputTextbox
 from .text_label import TextLabel
 import customtkinter as ctk
@@ -18,6 +19,14 @@ class GUI(ctk.CTkFrame):
         self.main_frame = ctk.CTkFrame(self.root, fg_color=bg_color)
         self.stats_frame = ctk.CTkFrame(self.main_frame, fg_color=bg_color)
 
+        self.GRADE_COLOR_PALLETE = {
+            "great":  "#85cf5b",
+            "good":  "#91c771",
+            "average":  "#d6ce56",
+            "bad":  "#cc915a",
+            "worst":  "#cc6f5a",
+        }
+
         self.create_widgets()
 
     def run(self):
@@ -27,7 +36,10 @@ class GUI(ctk.CTkFrame):
 
     def create_widgets(self):
         self.text_label = TextLabel(self.main_frame)
+        self.time_label = TimeLabel(self.main_frame)
+
         self.input_textbox = InputTextbox(self.main_frame)
         self.accuracy_label = AccuracyLabel(self.stats_frame)
+
         self.speed_label = SpeedLabel(self.stats_frame)
         self.reset_button = ResetButton(self.main_frame)

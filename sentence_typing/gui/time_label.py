@@ -1,15 +1,15 @@
 import customtkinter as ctk
 
 
-class AccuracyLabel(ctk.CTkLabel):
+class TimeLabel(ctk.CTkLabel):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)
-        AccuracyLabel.configure(
+        TimeLabel.configure(
             self,
-            text="Accuracy: 0%",
+            text="Time elapsed: 0 seconds",
             font=("Ubuntu", 16),
             corner_radius=8,
-            justify="left",
+            justify="right",
             text_color="grey30",
         )
-        self.pack(pady=[5, 30])
+        self.pack()

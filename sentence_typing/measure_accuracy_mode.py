@@ -91,18 +91,52 @@ class MeasureAccuracyMode():
 
     def calculate_stats(self):
         try:
-            time_elapsed = 0
+            start_time = time.time()
             while self.running:
-                time.sleep(0.05)
-                time_elapsed += 0.05
-                wpm = 60 * len(self.gui.input_textbox.get(
-                    0.0, "end").split()) / time_elapsed
-                cps = self.chars_typed / time_elapsed
-                cpm = cps * 60
-                self.gui.speed_label.configure(
-                    text=f"WPM: {wpm:.2f}\nCPM: {cpm: .2f}\nCPS: {cps: .2f}")
-                self.gui.accuracy_label.configure(
-                    text=f"Accuracy: {self.accuracy: .2f}%")
+                time_elapsed = time.time() - start_time
+                if time_elapsed > 0:  # Avoid division by zero
+                    wpm = 60 * len(self.gui.input_textbox.get(
+                        0.0, "end").split()) / time_elapsed
+                    cps = self.chars_typed / time_elapsed
+                    cpm = cps * 60
+                    self.gui.speed_label.configure(
+                        text=f"WPM: {wpm:.2f}\nCPM: {cpm:.2f}\nCPS: {cps:.2f}")
+                    self.gui.accuracy_label.configure(
+                        text=f"Accuracy: {self.accuracy:.2f}%")
+                    self.gui.time_label.configure(
+                        text=f"Time elapsed: {time_elapsed: .1f} seconds.")
+
+                    if wpm > 50:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif wpm > 45:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif wpm > 40:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif wpm > 35:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
+
+                    if self.accuracy > 95:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif self.accuracy > 90:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif self.accuracy > 80:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif self.accuracy > 70:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
         except Exception as e:
             self.logger.error(f"Error calculating stats: {e}")
 
@@ -142,6 +176,7 @@ class MeasureAccuracyMode():
             self.gui.input_textbox.unbind("<Key>")
             self.gui.input_textbox.delete("0.0", "end")
             self.gui.input_textbox.configure(text_color="white")
+            self.running = False
             self.logger.info("RESET")
         except Exception as e:
             self.logger.error(f"Error resetting GUI: {e}")

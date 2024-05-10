@@ -44,7 +44,7 @@ class FullAccuracyMode():
             self.text_data = open("text_data.txt", "r").read().split("\n")
             self.correct_text = random.choice(self.text_data)
             self.hidden_correct_text = "".join(
-                char if char == " " else "*" for char in self.correct_text
+                char if char == " " else "_" for char in self.correct_text
             )
             self.gui.text_label.configure(text=self.hidden_correct_text)
         except FileNotFoundError as e:
@@ -70,7 +70,7 @@ class FullAccuracyMode():
             key_code = event.keysym
 
             if typed_char == self.correct_text[self.current_typing_index]:
-                self.gui.input_textbox.configure(text_color="#71c788")
+                self.gui.input_textbox.configure(text_color="white")
                 self.current_typing_index += 1
                 self.correct_chars_typed += 1
                 self.logger.debug("Correct char pressed: %s", typed_char)
@@ -78,10 +78,10 @@ class FullAccuracyMode():
                 if self.current_typing_index >= len(self.correct_text):
                     self.running = False
                     self.gui.input_textbox.unbind("<KeyPress>")
-                    self.gui.input_textbox.configure(state="disabled")
             elif key_code not in SPECIAL_KEYS:
                 self.incorrect_chars_typed += 1
-                self.gui.input_textbox.configure(text_color="#ab5555")
+                self.gui.input_textbox.configure(
+                    text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
                 self.logger.debug("Incorrect char pressed: %s", typed_char)
                 return "break"
         except Exception as e:
@@ -89,23 +89,59 @@ class FullAccuracyMode():
 
     def calculate_stats(self):
         try:
-            time_elapsed = 0
+            start_time = time.time()
             while self.running:
-                time.sleep(0.05)
-                time_elapsed += 0.05
-                wpm = 60 * len(self.gui.input_textbox.get(
-                    0.0, "end").split()) / time_elapsed
-                cps = self.current_typing_index / time_elapsed
-                cpm = cps * 60
-                if self.correct_chars_typed != 0:
-                    accuracy = 100 * self.correct_chars_typed / \
-                        (self.correct_chars_typed + self.incorrect_chars_typed)
-                else:
-                    accuracy = 0
-                self.gui.speed_label.configure(
-                    text=f"WPM: {wpm:.2f}\nCPM: {cpm: .2f}\nCPS: {cps: .2f}")
-                self.gui.accuracy_label.configure(
-                    text=f"Accuracy: {accuracy: .2f}%")
+                time_elapsed = time.time() - start_time
+                if time_elapsed > 0:
+                    wpm = 60 * len(self.gui.input_textbox.get(
+                        0.0, "end").split()) / time_elapsed
+                    cps = self.current_typing_index / time_elapsed
+                    cpm = cps * 60
+                    if self.correct_chars_typed != 0:
+                        accuracy = 100 * self.correct_chars_typed / \
+                            (self.correct_chars_typed + self.incorrect_chars_typed)
+                    else:
+                        accuracy = 0
+                    self.gui.speed_label.configure(
+                        text=f"WPM: {wpm:.2f}\nCPM: {cpm: .2f}\nCPS: {cps: .2f}")
+                    self.gui.accuracy_label.configure(
+                        text=f"Accuracy: {accuracy: .2f}%")
+                    self.gui.time_label.configure(
+                        text=f"Time elapsed: {time_elapsed: .1f} seconds.")
+
+                    if wpm > 50:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif wpm > 45:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif wpm > 40:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif wpm > 35:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
+
+                    if accuracy > 95:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif accuracy > 90:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif accuracy > 80:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif accuracy > 70:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
+
+                # time.sleep(0.05)  # Adjust this value as needed for performance
         except Exception as e:
             self.logger.error(f"Error calculating stats: {e}")
 
@@ -116,8 +152,9 @@ class FullAccuracyMode():
             self.correct_chars_typed = 0
             self.incorrect_chars_typed = 0
             self.gui.input_textbox.unbind("<Key>")
-            self.gui.input_textbox.delete("0.0", "end")
+            self.gui.input_textbox.delete("1.0", "end")
             self.gui.input_textbox.configure(text_color="white")
+            self.running = False
             self.logger.info("RESET")
         except Exception as e:
             self.logger.error(f"Error resetting GUI: {e}")
