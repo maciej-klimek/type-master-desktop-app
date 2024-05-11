@@ -1,6 +1,5 @@
 import customtkinter as ctk
 
-
 class InputTextbox(ctk.CTkTextbox):
     def __init__(self, master=None, **kw):
         super().__init__(master, **kw)

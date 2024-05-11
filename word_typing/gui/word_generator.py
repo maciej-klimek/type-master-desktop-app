@@ -3,8 +3,8 @@ from word_typing.gui.word_reader import read_words
 import tkinter as tk
 
 
-
-word_list=read_words('../words.txt')
+root = tk.Tk()
+word_list=read_words('words.txt')
 canvas_width = 800
 canvas_height = 600
 font_size = 30
