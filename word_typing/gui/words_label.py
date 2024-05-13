@@ -3,8 +3,8 @@ import tkinter as tk
 import random
 
 class WordsLabel(ctk.CTkLabel):
-    def __init__(self, parent, canvas_width=800, canvas_height=600, font_size=30, *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
+    def __init__(self, root, canvas_width=800, canvas_height=600, font_size=30, *args, **kwargs):
+        super().__init__(root, *args, **kwargs)
         self.root = root
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
@@ -20,21 +20,11 @@ class WordsLabel(ctk.CTkLabel):
         self.generated_words = []
 
         self.word_list = self.read_words('words.txt')
-
         self.slide_words_through_canvas()
         self.generate_word()
-    def slide_words_through_canvas(self):
-        for i, label_id in enumerate(self.word_labels):
-            self.canvas.move(label_id, 0.2, 0)  # Move words slowly to the right
-            x, _ = self.canvas.coords(label_id)
-            if x > self.canvas_width:  # If word reaches the right side
-                self.canvas.delete(label_id)  # Remove the word label from the canvas
-                self.word_labels.pop(i)  # Remove the label from the list
-                break
-
-        self.canvas.after(1, self.slide_words_through_canvas)
 
     def generate_word(self):
+        print(self.generated_words)
         word = random.choice(self.word_list)
 
         while word in self.generated_words:
@@ -50,14 +40,23 @@ class WordsLabel(ctk.CTkLabel):
         self.word_positions.append((x_pos, y_pos))
         self.canvas.after(1000, self.generate_word)
 
+    def slide_words_through_canvas(self):
+        for i, label_id in enumerate(self.word_labels):
+            self.canvas.move(label_id, 0.2, 0)  # Move words slowly to the right
+            x, _ = self.canvas.coords(label_id)
+            if x > self.canvas_width:  # If word reaches the right side
+                self.canvas.delete(label_id)  # Remove the word label from the canvas
+                self.word_labels.pop(i)  # Remove the label from the list
+                break
+        self.canvas.after(1, self.slide_words_through_canvas)
+
     @staticmethod
     def read_words(filename):
         with open(filename, 'r') as file:
             words = file.readlines()
         return [word.strip() for word in words]
 
-
-    def is_colliding(x1, y1, x2, y2):
+    def is_colliding(self, x1, y1, x2, y2):
         return abs(x1 - x2) < 100 and abs(y1 - y2) < 30
 
 

@@ -54,7 +54,7 @@ root = tk.Tk()
 root.title("Word Flow")
 root.configure(bg='black')
 
-word_list = read_words('gui/words.txt')
+word_list = read_words('words.txt')
 
 canvas_width = 800
 canvas_height = 600

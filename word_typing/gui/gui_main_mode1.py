@@ -1,7 +1,8 @@
 import customtkinter as ctk
-from input_textbox import InputTextbox
-from reset_button import ResetButton
-from words_label import WordsLabel
+from .input_textbox import InputTextbox
+from .reset_button import ResetButton
+from .words_label import WordsLabel
+from .speed_label import SpeedLabel
 
 ctk.set_default_color_theme("green")
 ctk.set_appearance_mode("Dark")
@@ -15,6 +16,8 @@ class GUI(ctk.CTkFrame):
         bg_color = self.root.cget("bg")
         self.frame = ctk.CTkFrame(self.root, fg_color=bg_color)
 
+        self.create_widgets()
+
     def run(self):
         self.frame.pack(expand=True)
         self.root.mainloop()
@@ -23,6 +26,7 @@ class GUI(ctk.CTkFrame):
         self.input_textbox = InputTextbox(self.frame)
         self.words_label = WordsLabel(self.frame)
         self.reset_button = ResetButton(self.frame)
+        self.speed_label = SpeedLabel(self.frame)
 
 
 
