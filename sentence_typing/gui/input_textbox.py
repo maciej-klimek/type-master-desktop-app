@@ -8,10 +8,10 @@ class InputTextbox(ctk.CTkTextbox):
             self,
             fg_color=("grey18"),
             width=600,
-            height=60,
+            height=90,
             font=("Cascadia Code", 16),
             border_color="grey30",
             border_width=2,
             wrap="word",
         )
-        self.pack(expand=True, pady=50, padx=50)
+        self.pack(expand=True, pady=[50, 0], padx=50)
