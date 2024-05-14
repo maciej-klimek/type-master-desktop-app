@@ -10,14 +10,11 @@ ctk.set_appearance_mode("Dark")
 
 
 class GUI(ctk.CTkFrame):
-    def __init__(self) -> None:
-        self.root = ctk.CTk()
-        self.root.title("TypeMaster")
-        self.root.geometry("1000x800")
+    def __init__(self, parent):
+        self.root = parent  # Set the root window to the parent component
 
-        bg_color = self.root.cget("bg")
-        self.main_frame = ctk.CTkFrame(self.root, fg_color=bg_color)
-        self.stats_frame = ctk.CTkFrame(self.main_frame, fg_color=bg_color)
+        self.main_frame = ctk.CTkFrame(self.root, fg_color="grey14")
+        self.stats_frame = ctk.CTkFrame(self.main_frame, fg_color="grey14")
 
         self.GRADE_COLOR_PALLETE = {
             "great":  "#85cf5b",

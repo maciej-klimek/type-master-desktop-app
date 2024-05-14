@@ -2,26 +2,17 @@ import threading
 import logging
 import random
 import time
-from gui.gui_main import GUI
+from sentence_typing.gui.gui_main import GUI
+from sentence_typing.config import SENTENCES_PATH, SPECIAL_KEYS
 
 logging.basicConfig(level=logging.DEBUG)
 
-SPECIAL_KEYS = {
-    "Shift_L": "Left Shift",
-    "Shift_R": "Right Shift",
-    "Control_L": "Left Ctrl",
-    "Control_R": "Right Ctrl",
-    "Alt_L": "Left Alt",
-    "Alt_R": "Right Alt",
-    "Caps_Lock": "Caps Lock"
-}
-
 
 class FullAccuracyMode():
-    def __init__(self):
+    def __init__(self, parent):
 
         self.logger = logging.getLogger(__name__)
-        self.gui = GUI()
+        self.gui = GUI(parent)  # Pass the parent component here
 
         self.running = False
         self.correct_chars_typed = 0
@@ -33,15 +24,16 @@ class FullAccuracyMode():
         except Exception as e:
             self.logger.error(f"Error initializing: {e}")
 
-        self.gui.input_textbox.bind("<Button-1>", self.on_start)
-        self.gui.reset_button.bind("<Button-1>", self.on_reset)
-        self.gui.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+        self.gui.input_textbox.configure(state="disabled")
+        self.gui.input_textbox.focus_set()
 
+        self.gui.input_textbox.bind("<space>", self.on_start)
+        self.gui.reset_button.bind("<Button-1>", self.on_reset)
         self.gui.run()
 
     def get_new_text(self, event=None):
         try:
-            self.text_data = open("text_data.txt", "r").read().split("\n")
+            self.text_data = open(SENTENCES_PATH, "r").read().split("\n")
             self.correct_text = random.choice(self.text_data)
             self.hidden_correct_text = "".join(
                 char if char == " " else "_" for char in self.correct_text
@@ -52,7 +44,10 @@ class FullAccuracyMode():
 
     def on_start(self, event=None):
         try:
+            self.gui.input_textbox.configure(state="normal")
+            self.gui.input_textbox.unbind("<space>")
             self.gui.input_textbox.bind("<Key>", self.on_key_press)
+
             self.gui.text_label.configure(text=self.correct_text)
             self.logger.info("START")
             if not self.running:
@@ -66,6 +61,8 @@ class FullAccuracyMode():
 
     def on_key_press(self, event):
         try:
+            if self.gui.input_textbox.get(1.0) == " ":
+                self.gui.input_textbox.delete(1.0)
             typed_char = event.char
             key_code = event.keysym
 
@@ -78,6 +75,8 @@ class FullAccuracyMode():
                 if self.current_typing_index >= len(self.correct_text):
                     self.running = False
                     self.gui.input_textbox.unbind("<KeyPress>")
+                    self.gui.input_textbox.insert("end", ".")
+                    self.gui.input_textbox.configure(state="disabled")
             elif key_code not in SPECIAL_KEYS:
                 self.incorrect_chars_typed += 1
                 self.gui.input_textbox.configure(
@@ -148,12 +147,16 @@ class FullAccuracyMode():
     def on_reset(self, event=None):
         try:
             self.get_new_text()
+            self.gui.input_textbox.configure(state="normal")
             self.current_typing_index = 0
             self.correct_chars_typed = 0
             self.incorrect_chars_typed = 0
             self.gui.input_textbox.unbind("<Key>")
             self.gui.input_textbox.delete("1.0", "end")
+            self.gui.input_textbox.bind("<space>", self.on_start)
             self.gui.input_textbox.configure(text_color="white")
+            self.gui.input_textbox.configure(state="disabled")
+
             self.running = False
             self.logger.info("RESET")
         except Exception as e:

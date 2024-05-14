@@ -1,26 +1,19 @@
 SENTENCE-TYPING:
-  - głowne gui w ktorym user wybiera sobie ktory tryb chce odpalic
   - zamiast zwyklego pliku txt z sentencjami do pisania:
     - albo baza danych (jak sie uda to jeszcze interface do modyfikowania tej bazy przez usera, dodawanie sentencji itp):
     - albo prompty do chata i dynamiczne generowanie tych sentencji (to raczej jako ciekawostka nie ma co za dlugo na tym siedziec)
 
   # do obu modów:
-    - lepsze odpalanie pisania, klikanie myszką w okienko srednie jest
-    - sterowanie gui za pomocą klawiatury zeby nie trzeba bylo klika
-    - mierzenie words per minute w counterze
+    - sterowanie gui za pomocą klawiatury zeby nie trzeba bylo klika, ZOSTAŁ RESET DO ZROBIENIA,
+    - Tytuł modu u góry, tak żeby działało z menu
 
   # full_accuracy_mode:
     - potestowac sporo czy nie ma jakis bugow (na pewno jakies sa)
-    - lepsze gui jak bedzie czas i wena
-
-  # measure_accuracy_mode:
-    - kolorowanie liter w zaleznosci czy są dobrze czy zle wpisane
 
 
-###
-imo lepiej jak zaczniesz wlasnie word-typing sb dłubać a ja powoli sobie dokoncze to sentence-typing, 
-obczaj sobie też jak zrobilem gui, imo taki model że tworzysz widgety jako instancje rozszerzonych klas najlepiej działa
-###
+MAIN:
+  - zrobi porządek z main.py, (backgroudn color dac do jakiegos configa zamiast hardcoda, najlepiej zeby wszędzie sie zmienial automatycznie),
+  - lepsze UI w MainMenu, fajnie jakby sie udalo ze buttony do wybierania modów są przyklejone do dolnej ramki ekranu
 
 WORD-TYPING 
 - napisac ten kod bardziej czytelnie bo ciężary są tera (rozdzielic funkcjonalnosc i ui na osobne pliki itp)
