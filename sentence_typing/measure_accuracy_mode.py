@@ -3,7 +3,7 @@ import logging
 import random
 import time
 from sentence_typing.gui.gui_main import GUI
-from sentence_typing.config import SENTENCES_PATH, SPECIAL_KEYS
+from config import SENTENCES_PATH, SPECIAL_KEYS
 
 logging.basicConfig(level=logging.DEBUG)
 

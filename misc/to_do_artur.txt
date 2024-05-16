@@ -1,0 +1,22 @@
+# Dobra to tak, zmiany:
+- pozamienialem sporo nazw plikow, zmiennych itp zeby bylo bardziej intuicyjnie
+- nwm czy zrobimy wkoncu dwa tryby ze słowami, narazie sie skupmy na jednym i imo lepiej żeby to był ten ze spadającymi niż lęcacymi lewo -> prawo
+- dlatego przerobilem to twoje na te spadające wlasnie, 
+- pozatym zrobilem ten uklad ui o ktorym mowilismy (ze staty i takie rzeczy po prawej), oczywiscie mocno rough wersja, możesz tam zmienaic wszystko na luzie
+
+!! teraz odpalasz apke z glownego folderu - plik main.py i tam sobie wybierasz mode, finalnie to ui bedzie inaczej wygladac oczywiscie ale narazie chcialem zeby po prostu dzialalo
+   a i sentence mody sie odpala przez kliknięcie spacji jak cos
+
+
+# Do zrobienia imo w pierwszej kolejnosci:
+- w word_animation_box.py oprocz animacji jest większosc glownej funkcjonalnosc calego modu, imo lepiej by bylo jakby jednak funkcjonalnosc byla w samym word_typing_mode.py
+  no więc to trzeba przeniesc miedzy tymi plikami (chodzi mi o takie rzeczy jak czytanie słow z pliku, 
+  jak sie uda to tez spoko jakby same slowa sie generowaly w samym word_typing_mode.py i były potem przekazywanie do animacji ale to do obczajenia czy ma sens)
+- no najwazniejsze zeby sama funkcjonalnosc, to juz obgadalismy, ale w sumie masz racje ze lepiej będzie jak możesz stracic kilka słow za nim przegrasz
+- z funkcjonalnoscia to wazne tez zeby zrobic ze w miare jak user dluzej gra no to slowka zaczynaja latac szybciej zeby bylo ciezej
+- no i jak będziesz mial czas no to nad tym ui trzeba dlubac, dodac ten znacznik ile słów już straciles i ogarnac zeby to lepiej wygladalo, mozesz sobie looknac na te sentence tryby, 
+  wydaje mi sie ze taka wersja tych widegtow juz bedzie finalna i mozna zrobic takie same w word_modzie
+
+# main_ui i ogarnianie bugow to ja sie juz zajme, ale fajnie by bylo jakby sie nam jeszcze udalo jakas najprostrza baze danych ogarnac zamiast zwyklych txt, no ale to zobaczymy czy zostanie nam czasu na to
+
+wiem ze mocno chaotycznie to napisanie ale mam nadzieje ze idzie cos z tego wyciagnac

@@ -1,0 +1,18 @@
+
+# zamiast zwyklych plikow txt z danymi:
+  - albo baza danych (jak sie uda to jeszcze interface do modyfikowania tej bazy przez usera, dodawanie sentencji itp):
+  - albo prompty do chata i dynamiczne generowanie tych sentencji (to raczej jako ciekawostka nie ma co za dlugo na tym siedziec)
+
+# do obu modów:
+  - sterowanie gui za pomocą klawiatury zeby nie trzeba bylo klika, ZOSTAŁ RESET DO ZROBIENIA,
+  - Tytuł modu u góry, tak żeby działało z menu
+  - przerobić gui tak żeby widgety były packowane w gui_main odrazu (tak jak w word_typing)
+  - pokazanie zakonczenia pisania (jakis popup najlepiej)
+
+# full_accuracy_mode:
+  - potestowac sporo czy nie ma jakis bugow (na pewno jakies sa)
+
+
+MAIN:
+  - zrobi porządek z main.py (przy okazji ogarnąć jak działa), (background color dac do jakiegos globalnego configa zamiast hardcoda, najlepiej zeby wszędzie sie zmienial automatycznie),
+  - lepsze UI w MainMenu, fajnie jakby sie udalo ze buttony do wybierania modów są przyklejone do dolnej ramki ekranu

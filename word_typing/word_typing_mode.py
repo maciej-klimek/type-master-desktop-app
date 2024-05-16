@@ -2,15 +2,17 @@ import random
 import time
 import logging
 import threading
-from gui.gui_main_mode1 import GUI
+from word_typing.gui.gui_main import GUI
+from config import WORDS_PATH
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 class LeftToRightMode():
-    def __init__(self):
+    def __init__(self, parent):
 
         self.logger = logging.getLogger(__name__)
-        self.gui = GUI()
+        self.gui = GUI(parent)
 
         self.running = False
         self.correct_chars_typed = 0
@@ -19,13 +21,12 @@ class LeftToRightMode():
 
         self.gui.input_textbox.bind("<Button-1>")
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
-        self.gui.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         self.gui.run()
 
     def on_start(self, event=None):
         self.gui.input_textbox.bind("<Key>", self.on_key_press)
-        self.logger.debug("start")
+        self.logger.debug("START")
 
     def on_key_press(self, event):
         typed_char = event.char
@@ -37,12 +38,13 @@ class LeftToRightMode():
         self.gui.input_textbox.unbind("<Key>")
         self.gui.input_textbox.delete("0.0", "end")
         self.gui.input_textbox.configure(text_color="white")
-        self.logger.debug("reset")
+        self.logger.debug("RESET")
 
     def on_closing(self):
         self.running = False
         self.gui.root.destroy()
-        self.logger.debug("closing")
+        self.logger.debug("CLOSE")
+
 
 if __name__ == "__main__":
-   LeftToRightMode()
+    LeftToRightMode()
