@@ -8,7 +8,7 @@ from config import WORDS_PATH
 logging.basicConfig(level=logging.DEBUG)
 
 
-class LeftToRightMode():
+class WordTypingMode():
     def __init__(self, parent):
 
         self.logger = logging.getLogger(__name__)
@@ -47,4 +47,4 @@ class LeftToRightMode():
 
 
 if __name__ == "__main__":
-    LeftToRightMode()
+    WordTypingMode()

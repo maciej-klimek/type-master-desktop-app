@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from sentence_typing.full_accuracy_mode import FullAccuracyMode
 from sentence_typing.measure_accuracy_mode import MeasureAccuracyMode
-from word_typing.word_typing_mode import LeftToRightMode
+from word_typing.word_typing_mode import WordTypingMode
 
 ctk.set_appearance_mode("Dark")
 
@@ -89,7 +89,7 @@ class MainMenu(ctk.CTkFrame):
 
     def open_word_game_mode(self):
         self.destroy_mode_frame_content()
-        LeftToRightMode(self.mode_frame)
+        WordTypingMode(self.mode_frame)
 
     def destroy_mode_frame_content(self):
         for widget in self.mode_frame.winfo_children():
