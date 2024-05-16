@@ -20,7 +20,8 @@ class MainMenu(ctk.CTkFrame):
         self.pack(fill="y", expand="y")
         self.root.attributes('-fullscreen', True)
         # Bind the escape key to exit fullscreen mode
-        self.root.bind("<Escape>", self.exit_fullscreen)
+        self.is_fullscrenn_open = True
+        self.root.bind("<F11>", self.change_fullscreen)
         self.root.mainloop()
 
     def create_widgets(self):
@@ -75,7 +76,7 @@ class MainMenu(ctk.CTkFrame):
     def show_title_screen(self):
         self.destroy_mode_frame_content()
         title_label = ctk.CTkLabel(
-            self.mode_frame, text="Title Screen", font=("Arial", 24), width=1000, height=600)
+            self.mode_frame, text="Title Screen", font=("Arial", 60), width=1000, height=600)
         title_label.pack(expand=True)
 
     def open_full_accuracy_mode(self):
@@ -94,8 +95,13 @@ class MainMenu(ctk.CTkFrame):
         for widget in self.mode_frame.winfo_children():
             widget.destroy()
 
-    def exit_fullscreen(self, event=None):
-        self.root.attributes('-fullscreen', False)
+    def change_fullscreen(self, event=None):
+        if self.is_fullscrenn_open == False:
+            self.root.attributes('-fullscreen', True)
+            self.is_fullscrenn_open = True
+        else:
+            self.root.attributes('-fullscreen', False)
+            self.is_fullscrenn_open = False
 
 
 if __name__ == "__main__":

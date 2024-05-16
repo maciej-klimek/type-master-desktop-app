@@ -20,3 +20,5 @@
 # main_ui i ogarnianie bugow to ja sie juz zajme, ale fajnie by bylo jakby sie nam jeszcze udalo jakas najprostrza baze danych ogarnac zamiast zwyklych txt, no ale to zobaczymy czy zostanie nam czasu na to
 
 wiem ze mocno chaotycznie to napisanie ale mam nadzieje ze idzie cos z tego wyciagnac
+
+f11 wchodzisz i wychodzisz z fullscreena jak co,  mozesz se to wykomentowac oczywiscie jak bedzie irytowac
