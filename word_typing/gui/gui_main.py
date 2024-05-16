@@ -23,7 +23,7 @@ class GUI(ctk.CTkFrame):
 
     def create_widgets(self):
         left_frame = ctk.CTkFrame(self.frame, fg_color="grey14")
-        left_frame.pack(side="left", expand=True, fill="both", padx=(0, 10))
+        left_frame.pack(side="left", padx=(0, 10))
 
         right_frame = ctk.CTkFrame(self.frame, fg_color="grey14")
         right_frame.pack(side="right", padx=(10, 0))
