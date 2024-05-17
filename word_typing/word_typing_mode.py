@@ -15,8 +15,8 @@ class WordTypingMode():
         self.gui = GUI(parent)
 
         self.running = False
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
+        self.correct_words_typed = 0
+        self.incorrect_words_typed = 0
         self.current_typing_index = 0
 
         self.gui.input_textbox.bind("<Button-1>")
@@ -29,12 +29,17 @@ class WordTypingMode():
         self.logger.debug("START")
 
     def on_key_press(self, event):
-        typed_char = event.char
+        input_word = self.gui.input_textbox.get()
+        if input_word in self.gui.words_label.generated_words().word_list:
+            self.gui.words_label.generate_word().remove(input_word)
+            self.gui.input_textbox.delete("1.0", "end")
+            self.correct_words_typed += len(input_word)
+
 
     def on_reset(self):
         self.current_typing_index = 0
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
+        self.correct_words_typed = 0
+        self.incorrect_words_typed = 0
         self.gui.input_textbox.unbind("<Key>")
         self.gui.input_textbox.delete("0.0", "end")
         self.gui.input_textbox.configure(text_color="white")
