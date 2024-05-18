@@ -45,7 +45,7 @@ class WordAnimationBox(ctk.CTkLabel):
 
     def slide_words_through_canvas(self):
         for i, label_id in enumerate(self.word_labels):
-            self.canvas.move(label_id, 0, 0.2)  # Move words slowly downwards
+            self.canvas.move(label_id, 0, 0.1)  # Move words slowly downwards
             _, y = self.canvas.coords(label_id)
             if y > self.canvas_height:  # If word reaches the bottom
                 # Remove the word label from the canvas
@@ -53,6 +53,19 @@ class WordAnimationBox(ctk.CTkLabel):
                 self.word_labels.pop(i)  # Remove the label from the list
                 break
         self.canvas.after(1, self.slide_words_through_canvas)
+
+    def remove_word_from_canvas(self, word):
+        for i, label_id in enumerate(self.word_labels):
+            if self.canvas.itemcget(label_id, "text") == word:
+                self.canvas.delete(label_id)
+                self.word_labels.pop(i)
+                break
+
+    def reset_words(self):
+        for label_id in self.word_labels:
+            self.canvas.delete(label_id)
+        self.word_labels.clear()
+        self.generated_words.clear()
 
     @staticmethod
     def read_words(filename):
