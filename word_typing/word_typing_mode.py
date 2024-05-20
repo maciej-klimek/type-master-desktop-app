@@ -15,35 +15,78 @@ class WordTypingMode():
         self.gui = GUI(parent)
 
         self.running = False
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
+        self.correct_words_typed = 0
+        self.incorrect_words_typed = 0
         self.current_typing_index = 0
 
-        self.gui.input_textbox.bind("<Button-1>")
+        self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
 
         self.gui.run()
 
     def on_start(self, event=None):
-        self.gui.input_textbox.bind("<Key>", self.on_key_press)
         self.logger.debug("START")
 
     def on_key_press(self, event):
-        typed_char = event.char
+        input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
+        if input_word in self.gui.words_label.generated_words:
+            self.gui.words_label.generated_words.remove(input_word)
+            self.gui.input_textbox.delete("1.0", "end")
+            self.correct_words_typed += 1
+            self.gui.words_label.remove_word_from_canvas(input_word)
 
-    def on_reset(self):
-        self.current_typing_index = 0
-        self.correct_chars_typed = 0
-        self.incorrect_chars_typed = 0
-        self.gui.input_textbox.unbind("<Key>")
-        self.gui.input_textbox.delete("0.0", "end")
-        self.gui.input_textbox.configure(text_color="white")
-        self.logger.debug("RESET")
+    def calculate_stats(self):
+        try:
+            start_time = time.time()
+            while self.running:
+                time_elapsed = time.time() - start_time
+                if time_elapsed > 0:
+                    wpm = 60 * self.correct_words_typed / time_elapsed
+                    self.gui.speed_label.configure(text=f"WPM: {wpm:.2f}")
+
+                    if wpm > 50:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif wpm > 45:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif wpm > 40:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif wpm > 35:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
+                time.sleep(0.1)
+        except Exception as e:
+            self.logger.error(f"Error resetting GUI: {e}")
+
+
+    def on_reset(self, event=None):
+        try:
+            self.correct_words_typed = 0
+            self.incorrect_words_typed = 0
+            self.gui.input_textbox.unbind("<KeyRelease>")
+            self.gui.input_textbox.delete("1.0", "end")
+            self.gui.words_label.reset_words()
+            self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
+            self.logger.debug("RESET")
+        except Exception as e:
+            self.logger.error(f"Error resetting GUI: {e}")
+
+    def reset_game(self):
+        self.on_reset()
+        self.logger.debug("GAME RESET DUE TO FALLEN WORDS")
 
     def on_closing(self):
-        self.running = False
-        self.gui.root.destroy()
-        self.logger.debug("CLOSE")
+        try:
+            self.running = False
+            self.gui.root.destroy()
+            self.logger.debug("CLOSE")
+        except Exception as e:
+            self.logger.error(f"Error closing: {e}")
 
 
 if __name__ == "__main__":
