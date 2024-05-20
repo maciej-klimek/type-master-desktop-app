@@ -1,4 +1,4 @@
-SENTENCES_PATH = "db/sentence_data.txt"
+SENTENCES_PATH = "db/sentences.db"
 
 WORDS_PATH = "db/words_data.txt"
 

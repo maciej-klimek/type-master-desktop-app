@@ -1,7 +1,6 @@
 import threading
 import logging
-import random
-import time
+import sqlite3
 from sentence_typing.gui.gui_main import GUI
 from config import SENTENCES_PATH, SPECIAL_KEYS
 
@@ -35,15 +34,29 @@ class MeasureAccuracyMode():
 
     def get_new_text(self):
         try:
-            self.text_data = open(SENTENCES_PATH, "r").read().split("\n")
-            self.correct_text = random.choice(self.text_data)
-            self.correct_text_words = self.correct_text.split()
-            self.hidden_correct_text = "".join(
-                char if char == " " else "_" for char in self.correct_text
-            )
-            self.gui.text_label.configure(text=self.hidden_correct_text)
-        except FileNotFoundError as e:
-            self.logger.error(f"Error reading text file: {e}")
+            conn = sqlite3.connect(SENTENCES_PATH)
+            cursor = conn.cursor()
+
+            cursor.execute(
+                'SELECT sentence FROM sentences ORDER BY RANDOM() LIMIT 1')
+            result = cursor.fetchone()
+
+            if result:
+                self.correct_text = result[0]
+                self.correct_text_words = self.correct_text.split()
+                self.hidden_correct_text = "".join(
+                    char if char == " " else "_" for char in self.correct_text
+                )
+                self.gui.text_label.configure(text=self.hidden_correct_text)
+                self.logger.debug(f"Sentence from database: {
+                                  self.correct_text}")
+            else:
+                self.logger.error("No sentences found in the database.")
+
+            conn.close()
+
+        except sqlite3.Error as e:
+            self.logger.error(f"Error reading text from database: {e}")
 
     def on_start(self, event=None):
         try:

@@ -138,6 +138,26 @@ def display_help():
     print("   python database.py update <sentence_id> <new_sentence>")
 
 
+def get_random_sentence():
+    try:
+        conn = sqlite3.connect('sentences.db')
+        cursor = conn.cursor()
+
+        cursor.execute(
+            'SELECT sentence FROM sentences ORDER BY RANDOM() LIMIT 1')
+        result = cursor.fetchone()
+
+        conn.close()
+
+        if result:
+            return result[0]
+        else:
+            return None
+
+    except sqlite3.Error as e:
+        print(f"Error retrieving random sentence: {e}")
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         display_help()
@@ -176,5 +196,11 @@ if __name__ == "__main__":
         update_sentence_in_db(sentence_id, new_sentence)
     elif operation == "help":
         display_help()
+    elif operation == "get_random":
+        random_sentence = get_random_sentence()
+        if random_sentence:
+            print("Random sentence:", random_sentence)
+        else:
+            print("The database is empty.")
     else:
         print("Invalid operation. Use 'help' for usage instructions.")
