@@ -1,4 +1,7 @@
+# obczaj sobie skrypt do bazy danych co zrobilem, warto ogarnac tez cos takiego samego to word_typing
+
 # Do zrobienia imo w takiej kolejności:
+- *zamiast słowa z pliku to stworzyc baze danych i z niej brac
 - gierka sie zaczyna dopiero jak user nacisnie enter w tym boxie,
 - słowa sie respią tak żeby nie nachodziły na siebie bezpośrednio (bo czasem sie respi praktycznie jedno na drugim nie),
 - zamiast tego że słów respi się więcej można zrobić że słowa przyspieszają, imo może lepiej działac
