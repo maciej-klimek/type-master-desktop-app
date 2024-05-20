@@ -1,3 +1,23 @@
+# Do zrobienia imo w takiej kolejności:
+- gierka sie zaczyna dopiero jak user nacisnie enter w tym boxie,
+- słowa sie respią tak żeby nie nachodziły na siebie bezpośrednio (bo czasem sie respi praktycznie jedno na drugim nie),
+- zamiast tego że słów respi się więcej można zrobić że słowa przyspieszają, imo może lepiej działac
+- *słowa nie mogą sie zrespić za blisko siebie poziomo (że wiesz, po lewej np leci jedno słówko a praktycznie na tej samej linii po prawej drugie, bo ciezko userowi to napisac wtedy)
+- wskaźnik ile słów już ci już uciekło (imo np puste kwadraciki ktore zapełniają sie iksami, albo nawet takie coś => [x] [ ] [ ]),
+- ekran przegranej,
+- staty - imo tak jak bylo zaplanowane czyli po lewej od anim_boxa:
+  - wpm, 
+  - ile slow napisal user
+  - *fajna może być też lista słów ktore sie udalo napisac z zaznaczeniem ile razy kazde slowko bylo (ale to do przekminienia jescze)
+
+
+
+
+
+
+
+STARE -------------------------------------------------------------------------
+
 # Dobra to tak, zmiany:
 - pozamienialem sporo nazw plikow, zmiennych itp zeby bylo bardziej intuicyjnie
 - nwm czy zrobimy wkoncu dwa tryby ze słowami, narazie sie skupmy na jednym i imo lepiej żeby to był ten ze spadającymi niż lęcacymi lewo -> prawo
