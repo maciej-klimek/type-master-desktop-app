@@ -41,7 +41,25 @@ class WordTypingMode():
             while self.running:
                 time_elapsed = time.time() - start_time
                 if time_elapsed > 0:
-                    wpm = 60 * (self.correct_words_typed / time_elapsed)
+                    wpm = 60 * self.correct_words_typed / time_elapsed
+                    self.gui.speed_label.configure(text=f"WPM: {wpm:.2f}")
+
+                    if wpm > 50:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif wpm > 45:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif wpm > 40:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif wpm > 35:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
+                time.sleep(0.1)
         except Exception as e:
             self.logger.error(f"Error resetting GUI: {e}")
 
@@ -57,6 +75,10 @@ class WordTypingMode():
             self.logger.debug("RESET")
         except Exception as e:
             self.logger.error(f"Error resetting GUI: {e}")
+
+    def reset_game(self):
+        self.on_reset()
+        self.logger.debug("GAME RESET DUE TO FALLEN WORDS")
 
     def on_closing(self):
         try:

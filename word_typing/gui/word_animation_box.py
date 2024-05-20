@@ -20,6 +20,7 @@ class WordAnimationBox(ctk.CTkLabel):
         self.word_labels = []
         self.word_positions = []
         self.generated_words = []
+        self.words_fallen = 0
 
         self.word_list = self.read_words(WORDS_PATH)
         self.slide_words_through_canvas()
@@ -51,7 +52,10 @@ class WordAnimationBox(ctk.CTkLabel):
                 # Remove the word label from the canvas
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)  # Remove the label from the list
-                break
+                self.words_fallen += 1
+                if self.words_fallen >= 5:
+                    self.reset_game()
+                    break
         self.canvas.after(1, self.slide_words_through_canvas)
 
     def remove_word_from_canvas(self, word):
@@ -60,6 +64,10 @@ class WordAnimationBox(ctk.CTkLabel):
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)
                 break
+
+    def reset_game(self):
+        self.reset_words()
+        self.words_fallen = 0
 
     def reset_words(self):
         for label_id in self.word_labels:
