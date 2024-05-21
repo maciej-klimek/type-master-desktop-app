@@ -3,6 +3,7 @@ from word_typing.gui.input_textbox import InputTextbox
 from word_typing.gui.reset_button import ResetButton
 from word_typing.gui.word_animation_box import WordAnimationBox
 from word_typing.gui.speed_label import SpeedLabel
+from config import BACKGROUND_COLOR
 
 ctk.set_default_color_theme("green")
 ctk.set_appearance_mode("Dark")
@@ -13,7 +14,7 @@ class GUI(ctk.CTkFrame):
         super().__init__(parent)
         self.root = parent
 
-        self.frame = ctk.CTkFrame(self.root, fg_color="grey14")
+        self.frame = ctk.CTkFrame(self.root, fg_color=BACKGROUND_COLOR)
         self.frame.pack(expand=True, fill="both", padx=20, pady=20)
 
         self.create_widgets()
@@ -22,10 +23,10 @@ class GUI(ctk.CTkFrame):
         self.root.mainloop()
 
     def create_widgets(self):
-        left_frame = ctk.CTkFrame(self.frame, fg_color="grey14")
+        left_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
         left_frame.pack(side="left", padx=(0, 10))
 
-        right_frame = ctk.CTkFrame(self.frame, fg_color="grey14")
+        right_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
         right_frame.pack(side="right", padx=(10, 0))
 
         self.words_label = WordAnimationBox(left_frame)

@@ -11,3 +11,6 @@ SPECIAL_KEYS = {
     "Alt_R": "Right Alt",
     "Caps_Lock": "Caps Lock"
 }
+
+BACKGROUND_COLOR = "grey14"
+SELECTION_COLOR = "#414f35"
