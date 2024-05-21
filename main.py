@@ -18,9 +18,8 @@ class MainMenu(ctk.CTkFrame):
 
     def run(self):
         self.pack(fill="y", expand="y")
-        self.root.attributes('-fullscreen', True)
-        # Bind the escape key to exit fullscreen mode
-        self.is_fullscrenn_open = True
+        self.root.attributes('-fullscreen', False)
+        self.is_fullscrenn_open = False
         self.root.bind("<F11>", self.change_fullscreen)
         self.root.mainloop()
 

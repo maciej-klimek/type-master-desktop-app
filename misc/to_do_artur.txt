@@ -1,9 +1,12 @@
 # obczaj sobie skrypt do bazy danych co zrobilem, warto ogarnac tez cos takiego samego to word_typing
 
 # Do zrobienia imo w takiej kolejności:
-- *zamiast słowa z pliku to stworzyc baze danych i z niej brac
-- gierka sie zaczyna dopiero jak user nacisnie enter w tym boxie,
-- słowa sie respią tak żeby nie nachodziły na siebie bezpośrednio (bo czasem sie respi praktycznie jedno na drugim nie),
+- zamiast słowa z pliku brac z bazy danych
+- gierka sie zaczyna dopiero jak user nacisnie enter w inputboxie,
+- jak słówko wypadnie poza ekran to czyści sie inputbox (tak bedzie sie wygodniej grac imo, wiesz user zaczyna pisac jedno slowo, nie wyszlo mu to odrazu moze zaczac pisac kolejne bez spamowania backspaca)
+- lepszy inputbox, nie taki duży, wielkosci na jedno slowo i większy font,
+- jak user zacznie wpisywac cos zle to text w inpucie zmienia kolor na czerwony (tak jak w full acc mode)
+- słowa sie respią tak żeby nie nachodziły na siebie bezpośrednio (bo czasem sie respi praktycznie jedno na drugim),
 - zamiast tego że słów respi się więcej można zrobić że słowa przyspieszają, imo może lepiej działac
 - *słowa nie mogą sie zrespić za blisko siebie poziomo (że wiesz, po lewej np leci jedno słówko a praktycznie na tej samej linii po prawej drugie, bo ciezko userowi to napisac wtedy)
 - wskaźnik ile słów już ci już uciekło (imo np puste kwadraciki ktore zapełniają sie iksami, albo nawet takie coś => [x] [ ] [ ]),

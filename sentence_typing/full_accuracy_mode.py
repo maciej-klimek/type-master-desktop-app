@@ -12,7 +12,7 @@ class FullAccuracyMode():
     def __init__(self, parent):
 
         self.logger = logging.getLogger(__name__)
-        self.gui = GUI(parent)  # Pass the parent component here
+        self.gui = GUI(parent)
 
         self.running = False
         self.correct_chars_typed = 0
