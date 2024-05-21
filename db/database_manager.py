@@ -85,7 +85,7 @@ class CTkInputDialog(ctk.CTkToplevel):
         self.destroy()
 
 
-class DatabaseApp(ctk.CTk):
+class DatabaseManager(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Database Manager")
@@ -186,5 +186,5 @@ class DatabaseApp(ctk.CTk):
 if __name__ == "__main__":
     ctk.set_appearance_mode("Dark")
     ctk.set_default_color_theme("green")
-    app = DatabaseApp()
+    app = DatabaseManager()
     app.mainloop()

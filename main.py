@@ -3,6 +3,8 @@ from sentence_typing.full_accuracy_mode import FullAccuracyMode
 from sentence_typing.measure_accuracy_mode import MeasureAccuracyMode
 from word_typing.word_typing_mode import WordTypingMode
 from config import BACKGROUND_COLOR, SELECTION_COLOR
+from db.database_manager import DatabaseManager
+from PIL import Image
 
 ctk.set_appearance_mode("Dark")
 
@@ -16,7 +18,7 @@ class ModeButton(ctk.CTkButton):
             height=40,
             font=("Ubuntu", 14),
             fg_color="grey18",
-            text_color="white",
+            text_color="#91c771",
             border_color="grey30",
             border_width=2,
             hover_color=SELECTION_COLOR,
@@ -44,6 +46,7 @@ class MainMenu(ctk.CTkFrame):
         self.root.title("TypeMaster")
         self.root.geometry("1400x800")
         self.configure(fg_color=BACKGROUND_COLOR)
+        self.settings_image = ctk.CTkImage(Image.open("settings_icon.png"))
 
         self.create_widgets()
 
@@ -55,12 +58,11 @@ class MainMenu(ctk.CTkFrame):
         self.root.mainloop()
 
     def create_widgets(self):
-
         self.mode_frame = ctk.CTkFrame(self, fg_color=BACKGROUND_COLOR)
         self.mode_frame.pack(expand=True, fill="both")
 
         mode_buttons_frame = ctk.CTkFrame(self, fg_color=BACKGROUND_COLOR)
-        mode_buttons_frame.place(relx=0.5, rely=1.0, anchor="s", y=-10)
+        mode_buttons_frame.place(relx=0.51, rely=1.0, anchor="s", y=-30)
         self.show_title_screen()
 
         self.btn_full_accuracy = ModeButton(
@@ -71,9 +73,20 @@ class MainMenu(ctk.CTkFrame):
             mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode)
         self.btn_measure_accuracy.pack(side="left", padx=10)
 
-        self.btn_for_left_to_right_mode = ModeButton(
+        self.btn_word_typing = ModeButton(
             mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode)
-        self.btn_for_left_to_right_mode.pack(side="left", padx=10)
+        self.btn_word_typing.pack(side="left", padx=10)
+
+        self.btn_database_manager = ctk.CTkButton(
+            mode_buttons_frame,
+            text="",
+            width=40,
+            height=40,
+            fg_color=BACKGROUND_COLOR,
+            hover_color=SELECTION_COLOR,
+            image=self.settings_image,
+            command=self.open_database_manager)
+        self.btn_database_manager.pack(side="left", padx=10)
 
     def show_title_screen(self):
         self.destroy_mode_frame_content()
@@ -92,14 +105,20 @@ class MainMenu(ctk.CTkFrame):
         MeasureAccuracyMode(self.mode_frame)
 
     def open_word_game_mode(self):
-        self.update_button_states(self.btn_for_left_to_right_mode)
+        self.update_button_states(self.btn_word_typing)
         self.destroy_mode_frame_content()
         WordTypingMode(self.mode_frame)
+
+    def open_database_manager(self):
+        ctk.set_appearance_mode("Dark")
+        ctk.set_default_color_theme("green")
+        app = DatabaseManager()
+        app.mainloop()
 
     def update_button_states(self, active_button):
         self.btn_full_accuracy.configure(fg_color="grey18")
         self.btn_measure_accuracy.configure(fg_color="grey18")
-        self.btn_for_left_to_right_mode.configure(fg_color="grey18")
+        self.btn_word_typing.configure(fg_color="grey18")
 
         active_button.configure(fg_color=SELECTION_COLOR)
 
