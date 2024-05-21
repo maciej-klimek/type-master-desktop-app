@@ -3,7 +3,6 @@ import tkinter as tk
 import random
 from config import WORDS_PATH
 
-
 class WordAnimationBox(ctk.CTkLabel):
     def __init__(self, root, canvas_width=700, canvas_height=500, font_size=30, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
@@ -11,6 +10,7 @@ class WordAnimationBox(ctk.CTkLabel):
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
         self.font_size = font_size
+        self.game_started = False
 
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
@@ -23,10 +23,18 @@ class WordAnimationBox(ctk.CTkLabel):
         self.words_fallen = 0
 
         self.word_list = self.read_words(WORDS_PATH)
-        self.slide_words_through_canvas()
+
+    def start_game(self):
+        if self.game_started:
+            return
+
+        self.game_started = True
         self.generate_word()
+        self.slide_words_through_canvas()
 
     def generate_word(self):
+        if not self.game_started:
+            return
         word = random.choice(self.word_list)
 
         while word in self.generated_words:
@@ -45,6 +53,8 @@ class WordAnimationBox(ctk.CTkLabel):
         self.canvas.after(1000, self.generate_word)
 
     def slide_words_through_canvas(self):
+        if not self.game_started:
+            return
         for i, label_id in enumerate(self.word_labels):
             self.canvas.move(label_id, 0, 0.1)  # Move words slowly downwards
             _, y = self.canvas.coords(label_id)
@@ -68,6 +78,7 @@ class WordAnimationBox(ctk.CTkLabel):
     def reset_game(self):
         self.reset_words()
         self.words_fallen = 0
+        self.game_started = False
 
     def reset_words(self):
         for label_id in self.word_labels:
@@ -83,13 +94,3 @@ class WordAnimationBox(ctk.CTkLabel):
 
     def is_colliding(self, x1, y1, x2, y2):
         return abs(x1 - x2) < 100 and abs(y1 - y2) < 30
-
-
-# Poniższy kod uruchamia aplikację:
-# root = tk.Tk()
-# root.title("Word Flow")
-# root.configure(bg='black')
-
-# words_label = WordsLabel(root)
-
-# root.mainloop()
