@@ -2,7 +2,7 @@ import customtkinter as ctk
 from sentence_typing.full_accuracy_mode import FullAccuracyMode
 from sentence_typing.measure_accuracy_mode import MeasureAccuracyMode
 from word_typing.word_typing_mode import WordTypingMode
-from config import BACKGROUND_COLOR, SELECTION_COLOR
+from config import BACKGROUND_COLOR, SELECTION_COLOR, FAC_COLOR, MAC_COLOR, WTG_COLOR
 from db.database_manager import DatabaseManager
 from PIL import Image
 
@@ -18,7 +18,6 @@ class ModeButton(ctk.CTkButton):
             height=40,
             font=("Ubuntu", 14),
             fg_color="grey18",
-            text_color="#91c771",
             border_color="grey30",
             border_width=2,
             hover_color=SELECTION_COLOR,
@@ -44,7 +43,7 @@ class MainMenu(ctk.CTkFrame):
         super().__init__(parent)
         self.root = parent
         self.root.title("TypeMaster")
-        self.root.geometry("1400x800")
+        self.root.geometry("1400x900")
         self.configure(fg_color=BACKGROUND_COLOR)
         self.settings_image = ctk.CTkImage(Image.open("settings_icon.png"))
 
@@ -66,15 +65,15 @@ class MainMenu(ctk.CTkFrame):
         self.show_title_screen()
 
         self.btn_full_accuracy = ModeButton(
-            mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode)
+            mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode, text_color=FAC_COLOR)
         self.btn_full_accuracy.pack(side="left", padx=10)
 
         self.btn_measure_accuracy = ModeButton(
-            mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode)
+            mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode, text_color=MAC_COLOR)
         self.btn_measure_accuracy.pack(side="left", padx=10)
 
         self.btn_word_typing = ModeButton(
-            mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode)
+            mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode, text_color=WTG_COLOR)
         self.btn_word_typing.pack(side="left", padx=10)
 
         self.btn_database_manager = ctk.CTkButton(

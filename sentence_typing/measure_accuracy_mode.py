@@ -1,8 +1,9 @@
 import threading
 import logging
 import sqlite3
+import time
 from sentence_typing.gui.gui_main import GUI
-from config import SENTENCES_PATH, SPECIAL_KEYS
+from config import SENTENCES_PATH, SPECIAL_KEYS, MAC_COLOR
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -11,7 +12,7 @@ class MeasureAccuracyMode():
     def __init__(self, parent):
 
         self.logger = logging.getLogger(__name__)
-        self.gui = GUI(parent)
+        self.gui = GUI(parent, "Measure Typing Accuracy Mode", MAC_COLOR)
 
         self.running = False
         self.chars_typed = 0

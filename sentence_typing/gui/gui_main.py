@@ -4,14 +4,18 @@ from .accuracy_label import AccuracyLabel
 from .time_label import TimeLabel
 from .input_textbox import InputTextbox
 from .text_label import TextLabel
+from .title_label import TitleLabel
 import customtkinter as ctk
 
 ctk.set_appearance_mode("Dark")
 
 
 class GUI(ctk.CTkFrame):
-    def __init__(self, parent):
-        self.root = parent  # Set the root window to the parent component
+    def __init__(self, parent, title, title_color):
+        self.root = parent
+
+        self.title = title
+        self.title_color = title_color
 
         self.main_frame = ctk.CTkFrame(self.root, fg_color="grey14")
         self.stats_frame = ctk.CTkFrame(self.main_frame, fg_color="grey14")
@@ -32,6 +36,9 @@ class GUI(ctk.CTkFrame):
         self.root.mainloop()
 
     def create_widgets(self):
+        print(self.title)
+        self.title_label = TitleLabel(
+            self.main_frame, text=self.title, text_color=self.title_color)
         self.text_label = TextLabel(self.main_frame)
         self.time_label = TimeLabel(self.main_frame)
 
