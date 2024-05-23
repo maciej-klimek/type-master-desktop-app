@@ -4,7 +4,7 @@ from sentence_typing.measure_accuracy_mode import MeasureAccuracyMode
 from word_typing.word_typing_mode import WordTypingMode
 from config import BACKGROUND_COLOR, SELECTION_COLOR, FAC_COLOR, MAC_COLOR, WTG_COLOR
 from db.database_manager import DatabaseManager
-from PIL import Image
+from PIL import Image, ImageTk
 
 ctk.set_appearance_mode("Dark")
 
@@ -46,6 +46,8 @@ class MainMenu(ctk.CTkFrame):
         self.root.geometry("1400x900")
         self.configure(fg_color=BACKGROUND_COLOR)
         self.settings_image = ctk.CTkImage(Image.open("settings_icon.png"))
+        self.logo_image = ctk.CTkImage(
+            Image.open("type_master_logo.png"), size=(600, 200))
 
         self.create_widgets()
 
@@ -90,8 +92,8 @@ class MainMenu(ctk.CTkFrame):
     def show_title_screen(self):
         self.destroy_mode_frame_content()
         title_label = ctk.CTkLabel(
-            self.mode_frame, text="Title Screen", font=("Arial", 60), width=1000, height=600)
-        title_label.pack(expand=True)
+            self.mode_frame, image=self.logo_image, text="")
+        title_label.pack(expand=True, pady=[0, 50], padx=100)
 
     def open_full_accuracy_mode(self):
         self.update_button_states(self.btn_full_accuracy)

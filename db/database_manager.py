@@ -4,7 +4,7 @@ import sqlite3
 
 
 def create_connection():
-    return sqlite3.connect('words_sentences.db')
+    return sqlite3.connect('db/words_sentences.db')
 
 
 def get_all_records(table):
@@ -184,7 +184,6 @@ class DatabaseManager(ctk.CTk):
 
 
 if __name__ == "__main__":
-    ctk.set_appearance_mode("Dark")
-    ctk.set_default_color_theme("green")
+    ctk.set_appearance_mode("Light")
     app = DatabaseManager()
     app.mainloop()
