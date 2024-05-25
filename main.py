@@ -2,9 +2,9 @@ import customtkinter as ctk
 from sentence_typing.full_accuracy_mode import FullAccuracyMode
 from sentence_typing.measure_accuracy_mode import MeasureAccuracyMode
 from word_typing.word_typing_mode import WordTypingMode
-from config import BACKGROUND_COLOR, SELECTION_COLOR
+from config import BACKGROUND_COLOR, SELECTION_COLOR, FAC_COLOR, MAC_COLOR, WTG_COLOR
 from db.database_manager import DatabaseManager
-from PIL import Image
+from PIL import Image, ImageTk
 
 ctk.set_appearance_mode("Dark")
 
@@ -18,7 +18,6 @@ class ModeButton(ctk.CTkButton):
             height=40,
             font=("Ubuntu", 14),
             fg_color="grey18",
-            text_color="#91c771",
             border_color="grey30",
             border_width=2,
             hover_color=SELECTION_COLOR,
@@ -44,9 +43,11 @@ class MainMenu(ctk.CTkFrame):
         super().__init__(parent)
         self.root = parent
         self.root.title("TypeMaster")
-        self.root.geometry("1400x800")
+        self.root.geometry("1400x900")
         self.configure(fg_color=BACKGROUND_COLOR)
         self.settings_image = ctk.CTkImage(Image.open("settings_icon.png"))
+        self.logo_image = ctk.CTkImage(
+            Image.open("type_master_logo.png"), size=(600, 200))
 
         self.create_widgets()
 
@@ -66,15 +67,15 @@ class MainMenu(ctk.CTkFrame):
         self.show_title_screen()
 
         self.btn_full_accuracy = ModeButton(
-            mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode)
+            mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode, text_color=FAC_COLOR)
         self.btn_full_accuracy.pack(side="left", padx=10)
 
         self.btn_measure_accuracy = ModeButton(
-            mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode)
+            mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode, text_color=MAC_COLOR)
         self.btn_measure_accuracy.pack(side="left", padx=10)
 
         self.btn_word_typing = ModeButton(
-            mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode)
+            mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode, text_color=WTG_COLOR)
         self.btn_word_typing.pack(side="left", padx=10)
 
         self.btn_database_manager = ctk.CTkButton(
@@ -91,8 +92,8 @@ class MainMenu(ctk.CTkFrame):
     def show_title_screen(self):
         self.destroy_mode_frame_content()
         title_label = ctk.CTkLabel(
-            self.mode_frame, text="Title Screen", font=("Arial", 60), width=1000, height=600)
-        title_label.pack(expand=True)
+            self.mode_frame, image=self.logo_image, text="")
+        title_label.pack(expand=True, pady=[0, 50], padx=100)
 
     def open_full_accuracy_mode(self):
         self.update_button_states(self.btn_full_accuracy)
