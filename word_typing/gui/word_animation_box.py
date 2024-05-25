@@ -1,17 +1,21 @@
 import customtkinter as ctk
 import tkinter as tk
 import random
+import logging
 from config import WORDS_PATH
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 class WordAnimationBox(ctk.CTkLabel):
     def __init__(self, root, word_typing_mode, canvas_width=700, canvas_height=500, font_size=30, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
+        self.logger = logging.getLogger(__name__)
+
         self.root = root
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
         self.font_size = font_size
-        # Reference to the WordTypingMode instance
         self.word_typing_mode = word_typing_mode
         self.game_started = False
 
@@ -52,6 +56,7 @@ class WordAnimationBox(ctk.CTkLabel):
         self.word_labels.append(word_label)
         self.word_positions.append((x_pos, y_pos))
         self.canvas.after(1000, self.generate_word)
+        # self.logger.debug(self.generated_words)
 
     def slide_words_through_canvas(self):
         if not self.game_started:
@@ -77,6 +82,7 @@ class WordAnimationBox(ctk.CTkLabel):
                 break
 
     def reset_game(self):
+        self.logger.debug("RESET GUI")
         self.reset_words()
         self.words_fallen = 0
         self.game_started = False

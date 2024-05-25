@@ -49,18 +49,23 @@ def update_record(table, record_id, new_entry):
 
 
 class CTkInputDialog(ctk.CTkToplevel):
-    def __init__(self, master=None, title="Input", prompt=""):
+    def __init__(self, master=None, title="Input", prompt="", sentence=False):
         super().__init__(master)
         self.title(title)
-        self.geometry("300x150")
+        if sentence:
+            self.geometry("800x200")
+            self.input_textbox = ctk.CTkTextbox(self, width=600, height=60)
+
+        else:
+            self.geometry("400x200")
+            self.input_textbox = ctk.CTkTextbox(self, width=100, height=30)
 
         self.result = None
 
         self.label = ctk.CTkLabel(self, text=prompt)
         self.label.pack(pady=10)
 
-        self.entry = ctk.CTkEntry(self)
-        self.entry.pack(pady=10)
+        self.input_textbox.pack(pady=10)
 
         self.button_frame = ctk.CTkFrame(self)
         self.button_frame.pack(pady=10)
@@ -73,11 +78,11 @@ class CTkInputDialog(ctk.CTkToplevel):
             self.button_frame, text="Cancel", command=self.on_cancel)
         self.cancel_button.pack(side="right", padx=10)
 
-        self.entry.bind("<Return>", lambda event: self.on_ok())
-        self.entry.bind("<Escape>", lambda event: self.on_cancel())
+        self.input_textbox.bind("<Return>", lambda event: self.on_ok())
+        self.input_textbox.bind("<Escape>", lambda event: self.on_cancel())
 
     def on_ok(self):
-        self.result = self.entry.get()
+        self.result = self.input_textbox.get()
         self.destroy()
 
     def on_cancel(self):

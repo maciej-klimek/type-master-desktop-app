@@ -42,6 +42,7 @@ class WordTypingMode:
 
     def on_key_press(self, event):
         input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
+        self.logger.debug(input_word)
         if input_word in self.gui.word_animation_box.generated_words:
             self.gui.word_animation_box.generated_words.remove(input_word)
             self.gui.input_textbox.delete("1.0", "end")
@@ -77,9 +78,9 @@ class WordTypingMode:
             self.logger.error(f"Error calculating stats: {e}")
 
     def on_reset(self, event=None):
-        self._reset_game_state()
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
+        self._reset_game_state()
         self.logger.debug("RESET")
 
     def reset_game_due_to_fallen_words(self):
@@ -90,12 +91,13 @@ class WordTypingMode:
         try:
             self.correct_words_typed = 0
             self.incorrect_words_typed = 0
-            self.gui.input_textbox.unbind("<KeyRelease>")
             self.gui.input_textbox.delete("1.0", "end")
-            self.gui.word_animation_box.reset_words()
+            self.gui.word_animation_box.reset_game()
             self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
-            self.running = False  # Reset the game state
-            self.game_reset = True  # Set the game reset flag
+            self.running = False
+            self.game_reset = True
+            self.logger.debug("RESET GAME STATS")
+
         except Exception as e:
             self.logger.error(f"Error resetting GUI: {e}")
 
