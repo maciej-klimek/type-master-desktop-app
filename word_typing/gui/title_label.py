@@ -12,4 +12,3 @@ class TitleLabel(ctk.CTkLabel):
             text="Word Typing Game Mode",
             text_color=WTG_COLOR
         )
-        self.pack(expand=True, pady=[50, 50])

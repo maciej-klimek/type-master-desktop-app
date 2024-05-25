@@ -15,4 +15,3 @@ class ResetButton(ctk.CTkButton):
             border_width=2,
             hover_color="grey30"
         )
-        self.pack(expand=True)

@@ -9,6 +9,7 @@ from config import BACKGROUND_COLOR
 ctk.set_default_color_theme("green")
 ctk.set_appearance_mode("Dark")
 
+
 class GUI(ctk.CTkFrame):
     def __init__(self, parent, word_typing_mode) -> None:
         super().__init__(parent)
@@ -35,11 +36,13 @@ class GUI(ctk.CTkFrame):
         right_frame.pack(side="right", padx=(10, 0))
 
         self.title_label = TitleLabel(top_frame)
-        self.words_label = WordAnimationBox(left_frame, self.word_typing_mode, canvas_width=700, canvas_height=500, font_size=30)  # Pass word_typing_mode here
-        self.words_label.pack(expand=True, fill="both"))
+        self.title_label.pack(expand=True, pady=[50, 50])
+        self.word_animation_box = WordAnimationBox(
+            # Pass word_typing_mode here
+            left_frame, self.word_typing_mode, canvas_width=700, canvas_height=500, font_size=30)
 
         self.input_textbox = InputTextbox(left_frame)
-        self.input_textbox.pack(pady=(10, 20), padx=10, fill="x")
+        self.input_textbox.pack(pady=(10, 50), padx=10)
 
         self.reset_button = ResetButton(right_frame)
         self.reset_button.pack(pady=(10, 10), padx=10)

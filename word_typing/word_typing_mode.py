@@ -8,6 +8,7 @@ from word_typing.gui.word_animation_box import WordAnimationBox
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 class WordTypingMode:
     def __init__(self, parent):
         self.logger = logging.getLogger(__name__)
@@ -32,20 +33,20 @@ class WordTypingMode:
         if self.game_reset:  # Check if the game is in a reset state
             self.logger.debug("START AFTER RESET")
             self.running = True
-            self.gui.words_label.start_game()
+            self.gui.word_animation_box.start_game()
             self.game_reset = False  # Reset the flag
         else:
             self.logger.debug("START")
             self.running = True
-            self.gui.words_label.start_game()
+            self.gui.word_animation_box.start_game()
 
     def on_key_press(self, event):
         input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
-        if input_word in self.gui.words_label.generated_words:
-            self.gui.words_label.generated_words.remove(input_word)
+        if input_word in self.gui.word_animation_box.generated_words:
+            self.gui.word_animation_box.generated_words.remove(input_word)
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
-            self.gui.words_label.remove_word_from_canvas(input_word)
+            self.gui.word_animation_box.remove_word_from_canvas(input_word)
 
     def calculate_stats(self):
         try:
@@ -91,7 +92,7 @@ class WordTypingMode:
             self.incorrect_words_typed = 0
             self.gui.input_textbox.unbind("<KeyRelease>")
             self.gui.input_textbox.delete("1.0", "end")
-            self.gui.words_label.reset_words()
+            self.gui.word_animation_box.reset_words()
             self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
             self.running = False  # Reset the game state
             self.game_reset = True  # Set the game reset flag
@@ -105,6 +106,7 @@ class WordTypingMode:
             self.logger.debug("CLOSE")
         except Exception as e:
             self.logger.error(f"Error closing: {e}")
+
 
 if __name__ == "__main__":
     WordTypingMode()

@@ -3,6 +3,7 @@ import tkinter as tk
 import random
 from config import WORDS_PATH
 
+
 class WordAnimationBox(ctk.CTkLabel):
     def __init__(self, root, word_typing_mode, canvas_width=700, canvas_height=500, font_size=30, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
@@ -10,13 +11,14 @@ class WordAnimationBox(ctk.CTkLabel):
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
         self.font_size = font_size
-        self.word_typing_mode = word_typing_mode  # Reference to the WordTypingMode instance
+        # Reference to the WordTypingMode instance
+        self.word_typing_mode = word_typing_mode
         self.game_started = False
 
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
 
-        self.canvas.pack()
+        self.canvas.pack(pady=[0, 20])
 
         self.word_labels = []
         self.word_positions = []

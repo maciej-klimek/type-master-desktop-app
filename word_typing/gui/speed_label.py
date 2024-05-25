@@ -13,4 +13,3 @@ class SpeedLabel(ctk.CTkLabel):
             fg_color="#71c788",
             text_color="black",
         )
-        self.pack(expand=True, ipadx=20, ipady=20)

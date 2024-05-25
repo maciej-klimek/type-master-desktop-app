@@ -7,11 +7,10 @@ class InputTextbox(ctk.CTkTextbox):
         self.configure(
             self,
             fg_color=("grey18"),
-            width=600,
+            width=180,
             height=60,
-            font=("Cascadia Code", 16),
+            font=("Cascadia Code", 24),
             border_color="grey30",
             border_width=2,
             wrap="word",
         )
-        self.pack(expand=True)
