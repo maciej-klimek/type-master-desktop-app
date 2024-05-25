@@ -13,3 +13,4 @@ class SpeedLabel(ctk.CTkLabel):
             fg_color="#71c788",
             text_color="black",
         )
+#pushujemy widzowie
