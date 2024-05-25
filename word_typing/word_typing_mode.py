@@ -19,6 +19,8 @@ class WordTypingMode:
         self.incorrect_words_typed = 0
         self.current_typing_index = 0
         self.game_reset = False  # Flag to check if the game is in a reset state
+        self.words_for_next_level = 20
+        self.level = 1
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
@@ -48,39 +50,37 @@ class WordTypingMode:
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
 
-    def calculate_stats(self):
-        try:
-            start_time = time.time()
-            while self.running:
-                time_elapsed = time.time() - start_time
-                if time_elapsed > 0:
-                    wpm = 60 * self.correct_words_typed / time_elapsed
-                    self.gui.speed_label.configure(text=f"WPM: {wpm:.2f}")
+    def update_level(self):
+        if self.correct_words_typed >= self.words_for_next_level:
+            self.level += 1
+            self.words_for_next_level += 20
+            self.change_background_color()
+            self.logger.debug(f"LEVEL UP! New Level: {self.level}")
 
-                    if wpm > 50:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
-                    elif wpm > 45:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
-                    elif wpm > 40:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
-                    elif wpm > 35:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
-                    else:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
-                time.sleep(0.1)
-        except Exception as e:
-            self.logger.error(f"Error calculating stats: {e}")
+        self.update_speed_label()
+
+    def change_background_color(self):
+        level_colors = {
+            1: '#71c788',  # Green
+            2: '#6699FF',  # Blue
+            3: '#FFFF66',  # Yellow
+            4: '#FFB266',  # Orange
+            5: '#FF6666'  # Red
+        }
+        new_color = level_colors.get(self.level, '#71c788')
+        self.gui.speed_label.configure(fg_color=new_color)
 
     def on_reset(self, event=None):
         self._reset_game_state()
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
+        self.gui.speed_label.configure(text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
+        self.gui.speed_label.configure(fg_color='#71c788')
         self.logger.debug("RESET")
+
+    def update_speed_label(self):
+        self.gui.speed_label.configure(
+            text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: {self.words_for_next_level}")
 
     def reset_game_due_to_fallen_words(self):
         self._reset_game_state()

@@ -6,7 +6,7 @@ class SpeedLabel(ctk.CTkLabel):
         super().__init__(master, **kw)
         SpeedLabel.configure(
             self,
-            text="Accuracy: 0% \nCPS: 0\nWPM: 0",
+            text="Level: 1 \nCorrect words: 0\nNext level: 0",
             font=("Ubuntu", 16),
             corner_radius=8,
             justify="left",
