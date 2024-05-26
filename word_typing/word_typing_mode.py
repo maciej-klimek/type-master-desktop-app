@@ -71,33 +71,9 @@ class WordTypingMode:
         new_color = level_colors.get(self.level, '#71c788')
         self.gui.speed_label.configure(fg_color=new_color)
 
-    def calculate_stats(self):
-        try:
-            start_time = time.time()
-            while self.running:
-                time_elapsed = time.time() - start_time
-                if time_elapsed > 0:
-                    wpm = 60 * self.correct_words_typed / time_elapsed
-                    self.gui.speed_label.configure(text=f"WPM: {wpm:.2f}")
-
-                    if wpm > 50:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
-                    elif wpm > 45:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
-                    elif wpm > 40:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
-                    elif wpm > 35:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
-                    else:
-                        self.gui.speed_label.configure(
-                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
-                time.sleep(0.1)
-        except Exception as e:
-            self.logger.error(f"Error calculating stats: {e}")
+    def update_speed_label(self):
+        self.gui.speed_label.configure(
+            text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: {self.words_for_next_level}")
 
     def on_reset(self, event=None):
         self.gui.input_textbox.bind("<Return>", self.on_start)
