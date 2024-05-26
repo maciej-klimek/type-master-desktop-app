@@ -87,6 +87,8 @@ class WordTypingMode:
 
     def reset_game_due_to_fallen_words(self):
         self._reset_game_state()
+        self.gui.speed_label.configure(text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
+        self.gui.speed_label.configure(fg_color='#71c788')
         self.logger.debug("GAME RESET DUE TO FALLEN WORDS")
 
     def _reset_game_state(self):
