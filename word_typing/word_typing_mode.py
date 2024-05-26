@@ -51,6 +51,8 @@ class WordTypingMode:
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
 
+        self.update_level()
+
     def update_level(self):
         if self.correct_words_typed >= self.words_for_next_level:
             self.level += 1
