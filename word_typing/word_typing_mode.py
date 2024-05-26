@@ -19,6 +19,8 @@ class WordTypingMode:
         self.incorrect_words_typed = 0
         self.current_typing_index = 0
         self.game_reset = False  # Flag to check if the game is in a reset state
+        self.words_for_next_level = 20
+        self.level = 1
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
