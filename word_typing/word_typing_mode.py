@@ -51,6 +51,26 @@ class WordTypingMode:
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
 
+    def update_level(self):
+        if self.correct_words_typed >= self.words_for_next_level:
+            self.level += 1
+            self.words_for_next_level += 20
+            self.change_background_color()
+            self.logger.debug(f"LEVEL UP! New Level: {self.level}")
+
+        self.update_speed_label()
+
+    def change_background_color(self):
+        level_colors = {
+            1: '#71c788',  # Green
+            2: '#6699FF',  # Blue
+            3: '#FFFF66',  # Yellow
+            4: '#FFB266',  # Orange
+            5: '#FF6666'  # Red
+        }
+        new_color = level_colors.get(self.level, '#71c788')
+        self.gui.speed_label.configure(fg_color=new_color)
+
     def calculate_stats(self):
         try:
             start_time = time.time()
