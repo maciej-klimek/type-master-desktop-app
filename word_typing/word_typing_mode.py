@@ -55,8 +55,6 @@ class WordTypingMode:
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
             print(self.gui.word_animation_box.word_labels)
-            # self.gui.word_animation_box.word_labels[len(
-            #     self.gui.word_animation_box.word_labels)-1][1].configure(color="green")
 
         self.update_level()
 

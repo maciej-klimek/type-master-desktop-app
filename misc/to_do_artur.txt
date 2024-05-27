@@ -1,14 +1,25 @@
-# obczaj sobie skrypt do bazy danych co zrobilem, warto ogarnac tez cos takiego samego to word_typing
+# bracie ważna sprawa, jak dodajesz funkcjonalności których zadaniem jest zmieniac flow rozgrywki (np zmiana prędkości spadania słów, to ile słów jest na każdy level)
+  to dawaj te wartości do zmiennych w klasie, tak sie potem dużo łatwiej testuje i optymalizuje gierke
 
-# Do zrobienia imo w takiej kolejności:
-- zamiast słowa z pliku brac z bazy danych
+  o tego typu zmienne mi chodzi:
+        self.words_for_next_level = 5
+        self.increment_of_next_level = 5
+        self.level = 1
+        self.word_speed_change_factor = 0.02
+        self.word_generation_speed_change_factor = 30
+
+  bo wiesz jak potem sie testuje gierke to łatwiej zmieniac wartosci na gorze klasy niz szukac w jakiej funkcji to sie dzieje
+
+# Taski, najlepiej w takiej kolejności imo:
 - jak słówko wypadnie poza ekran to czyści sie inputbox (tak bedzie sie wygodniej grac imo, wiesz user zaczyna pisac jedno slowo, nie wyszlo mu to odrazu moze zaczac pisac kolejne bez spamowania backspaca)
+  + to co ustaliliśmy że usuwa sie tylko jesli user faktycznie zacząl probowac je pisac (np sprawdaz czy przynajmniej polowa stringa sie zgadza)
 - jak user zacznie wpisywac cos zle to text w inpucie zmienia kolor na czerwony (tak jak w full acc mode)
-- ekran przegranej,
+- ekran przegranej plus że jak user przegra no to pokazuje mu sie jakie staty sie mu udało wykręcic,
+- ostatnie słowo które leci w dół ma zawsze inny kolor niż reszta (np zielony albo cokolwiek co ci siądzie)
 - staty - imo tak jak bylo zaplanowane czyli po lewej od anim_boxa:
   - wpm, 
   - ile slow napisal user
-  - *fajna może być też lista słów ktore sie udalo napisac z zaznaczeniem ile razy kazde slowko bylo (ale to do przekminienia jescze)
+  - fajna może być też lista słów ktore sie udalo napisac z zaznaczeniem ile razy kazde slowko bylo (ale to do przekminienia jescze)
 
 
 
