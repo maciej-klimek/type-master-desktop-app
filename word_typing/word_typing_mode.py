@@ -1,10 +1,6 @@
-import random
-import time
 import logging
 import threading
 from word_typing.gui.gui_main import GUI
-from config import WORDS_PATH
-from word_typing.gui.animation_box import WordAnimationBox
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -39,21 +35,24 @@ class WordTypingMode:
         if self.game_reset:  # Check if the game is in a reset state
             self.logger.debug("START AFTER RESET")
             self.running = True
-            self.gui.word_animation_box.start_game()
+            self.gui.animation_box.start_game()
             self.game_reset = False  # Reset the flag
         else:
             self.logger.debug("START")
             self.running = True
-            self.gui.word_animation_box.start_game()
+            self.gui.animation_box.start_game()
+
+        self.gui.speed_label.configure(
+            text="Level: 1 \nCorrect words: 0\nNext level: 0")
 
     def on_key_press(self, event):
         input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
         self.logger.debug(input_word)
-        if input_word in self.gui.word_animation_box.generated_words:
-            self.gui.word_animation_box.generated_words.remove(input_word)
+        if input_word in self.gui.animation_box.generated_words:
+            self.gui.animation_box.generated_words.remove(input_word)
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
-            self.gui.word_animation_box.remove_word_from_canvas(input_word)
+            self.gui.animation_box.remove_word_from_canvas(input_word)
 
         self.update_level()
 
@@ -63,8 +62,8 @@ class WordTypingMode:
                 self.level += 1
                 self.words_for_next_level += self.increment_of_next_level
                 self.change_background_color()
-                self.gui.word_animation_box.word_moving_speed += self.word_speed_change_factor
-                self.gui.word_animation_box.word_generating_speed -= self.word_generation_speed_change_factor
+                self.gui.animation_box.word_moving_speed += self.word_speed_change_factor
+                self.gui.animation_box.word_generating_speed -= self.word_generation_speed_change_factor
             self.logger.debug(f"LEVEL UP! New Level: {self.level}")
 
         self.update_speed_label()
@@ -91,34 +90,27 @@ class WordTypingMode:
     def on_reset(self, event=None):
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
-        self._reset_game_state()
+        self.reset_game_state()
         self.gui.speed_label.configure(
             text="Level: 1 \nCorrect words: 0\nNext level: 0")
         self.gui.speed_label.configure(fg_color='#71c788')
-        self.gui.word_animation_box.word_moving_speed = 0.1
-        self.level = 1
-        self.words_for_next_level = 20
         self.logger.debug("RESET")
 
-    def reset_game_due_to_fallen_words(self):
-        self._reset_game_state()
+    def end_game(self):
+        self.reset_game_state()
         self.logger.debug("GAME RESET DUE TO FALLEN WORDS")
 
-    def _reset_game_state(self):
+    def reset_game_state(self):
         try:
             self.correct_words_typed = 0
             self.incorrect_words_typed = 0
             self.gui.input_textbox.delete("1.0", "end")
-            self.gui.word_animation_box.reset_game()
+            self.gui.animation_box.reset_game_state()
             self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
             self.running = False
             self.game_reset = True
-            self.gui.speed_label.configure(
-                text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
             self.gui.speed_label.configure(fg_color='#71c788')
-            self.gui.word_animation_box.word_moving_speed = 0.1
             self.level = 1
-            self.words_for_next_level = 20
             self.logger.debug("RESET GAME STATS")
 
         except Exception as e:

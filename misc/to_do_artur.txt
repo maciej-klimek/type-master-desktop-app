@@ -16,6 +16,7 @@
 - jak user zacznie wpisywac cos zle to text w inpucie zmienia kolor na czerwony (tak jak w full acc mode)
 - ekran przegranej plus że jak user przegra no to pokazuje mu sie jakie staty sie mu udało wykręcic,
 - ostatnie słowo które leci w dół ma zawsze inny kolor niż reszta (np zielony albo cokolwiek co ci siądzie)
+- użyć gdzieś threadingu w wordtypingmode (np do ładowania danych z tekstu, liczenia stat, żeby cos bylo po prostu bo chcialbym kilka przykładow do prezki miec)
 - staty - imo tak jak bylo zaplanowane czyli po lewej od anim_boxa:
   - wpm, 
   - ile slow napisal user

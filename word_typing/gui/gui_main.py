@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from word_typing.gui.input_textbox import InputTextbox
 from word_typing.gui.reset_button import ResetButton
-from word_typing.gui.animation_box import WordAnimationBox
+from word_typing.gui.animation_box import AnimationBox
 from word_typing.gui.speed_label import SpeedLabel
 from word_typing.gui.title_label import TitleLabel
 from config import BACKGROUND_COLOR
@@ -11,10 +11,10 @@ ctk.set_appearance_mode("Dark")
 
 
 class GUI(ctk.CTkFrame):
-    def __init__(self, parent, word_typing_mode) -> None:
+    def __init__(self, parent, word_typing_mode_instance):
         super().__init__(parent)
         self.root = parent
-        self.word_typing_mode = word_typing_mode  # Store the WordTypingMode instance
+        self.word_typing_mode_instance = word_typing_mode_instance
 
         self.frame = ctk.CTkFrame(self.root, fg_color=BACKGROUND_COLOR)
         self.frame.pack(expand=True,  padx=20, pady=20)
@@ -37,9 +37,8 @@ class GUI(ctk.CTkFrame):
 
         self.title_label = TitleLabel(top_frame)
         self.title_label.pack(expand=True, pady=[50, 50])
-        self.word_animation_box = WordAnimationBox(
-            # Pass word_typing_mode here
-            left_frame, self.word_typing_mode, canvas_width=900, canvas_height=550, font_size=20)
+        self.animation_box = AnimationBox(
+            left_frame, self.word_typing_mode_instance)
 
         self.input_textbox = InputTextbox(left_frame)
         self.input_textbox.pack(pady=(10, 50), padx=10)

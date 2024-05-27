@@ -8,16 +8,16 @@ from config import WORDS_PATH
 logging.basicConfig(level=logging.DEBUG)
 
 
-class WordAnimationBox(ctk.CTkLabel):
-    def __init__(self, root, word_typing_mode, canvas_width=700, canvas_height=500, font_size=20, *args, **kwargs):
+class AnimationBox(ctk.CTkLabel):
+    def __init__(self, root, word_typing_mode_instance, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
         self.root = root
-        self.canvas_width = canvas_width
-        self.canvas_height = canvas_height
-        self.font_size = font_size
-        self.word_typing_mode = word_typing_mode
+        self.word_typing_mode = word_typing_mode_instance
+        self.canvas_width = 900
+        self.canvas_height = 520
+        self.font_size = 20
         self.game_started = False
 
         self.word_moving_speed = 0.07
@@ -41,10 +41,10 @@ class WordAnimationBox(ctk.CTkLabel):
             return
 
         self.game_started = True
-        self.generate_word()
+        self.generate_words()
         self.slide_words_through_canvas()
 
-    def generate_word(self):
+    def generate_words(self):
         if not self.game_started:
             return
         word = random.choice(self.word_list)
@@ -60,7 +60,7 @@ class WordAnimationBox(ctk.CTkLabel):
             'Cascadia mono', self.font_size), anchor='w')
         self.word_labels.append(word_label)
         self.word_positions.append((x_pos, y_pos))
-        self.canvas.after(self.word_generating_speed, self.generate_word)
+        self.canvas.after(self.word_generating_speed, self.generate_words)
         # self.logger.debug(self.generated_words)
 
     def slide_words_through_canvas(self):
@@ -74,8 +74,8 @@ class WordAnimationBox(ctk.CTkLabel):
                 self.word_labels.pop(i)
                 self.words_fallen += 1
                 if self.words_fallen >= self.max_num_of_fallen_words:
-                    self.reset_game()
-                    self.word_typing_mode.reset_game_due_to_fallen_words()
+                    self.reset_game_state()
+                    self.word_typing_mode.end_game()
                     break
         self.canvas.after(1, self.slide_words_through_canvas)
 
@@ -86,19 +86,20 @@ class WordAnimationBox(ctk.CTkLabel):
                 self.word_labels.pop(i)
                 break
 
-    def reset_game(self):
+    def reset_game_state(self):
         self.logger.debug("RESET GUI")
-        self.reset_words()
+        self.reset_canvas()
         self.words_fallen = 0
+        self.word_moving_speed = 0.07
+        self.word_generating_speed = 1500
         self.game_started = False
 
-    def reset_words(self):
+    def reset_canvas(self):
         for label_id in self.word_labels:
             self.canvas.delete(label_id)
         self.word_labels.clear()
         self.generated_words.clear()
 
-    @staticmethod
     def read_words(db_path):
         words = []
         try:
