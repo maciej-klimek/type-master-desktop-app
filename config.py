@@ -1,6 +1,6 @@
 SENTENCES_PATH = "db/words_sentences.db"
 
-WORDS_PATH = "db/words_data.txt"
+WORDS_PATH = "db/words_sentences.db"
 
 SPECIAL_KEYS = {
     "Shift_L": "Left Shift",

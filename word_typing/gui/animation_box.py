@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 import random
 import logging
+import sqlite3
 from config import WORDS_PATH
 
 logging.basicConfig(level=logging.DEBUG)
@@ -19,8 +20,8 @@ class WordAnimationBox(ctk.CTkLabel):
         self.word_typing_mode = word_typing_mode
         self.game_started = False
 
-        self.word_moving_speed = 0.1
-        self.word_generating_speed = 1000
+        self.word_moving_speed = 0.07
+        self.word_generating_speed = 1500
         self.max_num_of_fallen_words = 5
 
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
@@ -54,7 +55,7 @@ class WordAnimationBox(ctk.CTkLabel):
             word = random.choice(self.word_list)
         self.generated_words.append(word)
         x_pos = random.randint(50, self.canvas_width - 100)
-        y_pos = -100
+        y_pos = -50
         word_label = self.canvas.create_text(x_pos, y_pos, text=word, fill='white', font=(
             'Cascadia mono', self.font_size), anchor='w')
         self.word_labels.append(word_label)
@@ -98,7 +99,19 @@ class WordAnimationBox(ctk.CTkLabel):
         self.generated_words.clear()
 
     @staticmethod
-    def read_words(filename):
-        with open(filename, 'r') as file:
-            words = file.readlines()
-        return [word.strip() for word in words]
+    def read_words(db_path):
+        words = []
+        try:
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT word FROM words")
+            rows = cursor.fetchall()
+            words = [row[0] for row in rows]
+        except sqlite3.Error as e:
+            logging.error(f"Database error: {e}")
+        except Exception as e:
+            logging.error(f"Exception in read_words: {e}")
+        finally:
+            if conn:
+                conn.close()
+        return words

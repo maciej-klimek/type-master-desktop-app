@@ -4,7 +4,7 @@ import logging
 import threading
 from word_typing.gui.gui_main import GUI
 from config import WORDS_PATH
-from word_typing.gui.word_animation_box import WordAnimationBox
+from word_typing.gui.animation_box import WordAnimationBox
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -20,11 +20,11 @@ class WordTypingMode:
         self.current_typing_index = 0
         self.game_reset = False
 
-        self.words_for_next_level = 5
-        self.increment_of_next_level = 5
+        self.words_for_next_level = 20
+        self.increment_of_next_level = 20
         self.level = 1
-        self.word_speed_change_factor = 0.02
-        self.word_generation_speed_change_factor = 30
+        self.word_speed_change_factor = 0.03
+        self.word_generation_speed_change_factor = 200
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
@@ -54,7 +54,6 @@ class WordTypingMode:
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
-            print(self.gui.word_animation_box.word_labels)
 
         self.update_level()
 
@@ -94,7 +93,7 @@ class WordTypingMode:
         self.gui.input_textbox.unbind("<KeyRelease>")
         self._reset_game_state()
         self.gui.speed_label.configure(
-            text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
+            text="Level: 1 \nCorrect words: 0\nNext level: 0")
         self.gui.speed_label.configure(fg_color='#71c788')
         self.gui.word_animation_box.word_moving_speed = 0.1
         self.level = 1
