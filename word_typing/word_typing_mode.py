@@ -55,10 +55,11 @@ class WordTypingMode:
 
     def update_level(self):
         if self.correct_words_typed >= self.words_for_next_level:
-            self.level += 1
-            self.words_for_next_level += 20
-            self.change_background_color()
-            self.gui.word_animation_box.speed += 0.1
+            if self.level < 5:
+                self.level += 1
+                self.words_for_next_level += 20
+                self.change_background_color()
+                self.gui.word_animation_box.speed += 0.01
             self.logger.debug(f"LEVEL UP! New Level: {self.level}")
 
         self.update_speed_label()
@@ -75,8 +76,12 @@ class WordTypingMode:
         self.gui.speed_label.configure(fg_color=new_color)
 
     def update_speed_label(self):
-        self.gui.speed_label.configure(
-            text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: {self.words_for_next_level}")
+        if self.level == 5:
+            self.gui.speed_label.configure(
+                text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: MAX LEVEL")
+        else:
+            self.gui.speed_label.configure(
+                text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: {self.words_for_next_level}")
 
     def on_reset(self, event=None):
         self.gui.input_textbox.bind("<Return>", self.on_start)
