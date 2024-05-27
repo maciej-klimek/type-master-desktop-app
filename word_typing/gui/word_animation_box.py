@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class WordAnimationBox(ctk.CTkLabel):
-    def __init__(self, root, word_typing_mode, canvas_width=700, canvas_height=500, font_size=30, *args, **kwargs):
+    def __init__(self, root, word_typing_mode, canvas_width=700, canvas_height=500, font_size=20, *args, **kwargs):
         super().__init__(root, *args, **kwargs)
         self.logger = logging.getLogger(__name__)
 
@@ -18,7 +18,10 @@ class WordAnimationBox(ctk.CTkLabel):
         self.font_size = font_size
         self.word_typing_mode = word_typing_mode
         self.game_started = False
-        self.speed = 0.1
+
+        self.word_moving_speed = 0.1
+        self.word_generating_speed = 1000
+        self.max_num_of_fallen_words = 5
 
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
@@ -50,26 +53,26 @@ class WordAnimationBox(ctk.CTkLabel):
                 self.generated_words = []
             word = random.choice(self.word_list)
         self.generated_words.append(word)
-        x_pos = random.randint(100, self.canvas_width - 200)
-        y_pos = random.randint(-500, -100)
+        x_pos = random.randint(50, self.canvas_width - 100)
+        y_pos = -100
         word_label = self.canvas.create_text(x_pos, y_pos, text=word, fill='white', font=(
             'Cascadia mono', self.font_size), anchor='w')
         self.word_labels.append(word_label)
         self.word_positions.append((x_pos, y_pos))
-        self.canvas.after(1000, self.generate_word)
+        self.canvas.after(self.word_generating_speed, self.generate_word)
         # self.logger.debug(self.generated_words)
 
     def slide_words_through_canvas(self):
         if not self.game_started:
             return
         for i, label_id in enumerate(self.word_labels):
-            self.canvas.move(label_id, 0, self.speed)
+            self.canvas.move(label_id, 0, self.word_moving_speed)
             _, y = self.canvas.coords(label_id)
             if y > self.canvas_height:
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)
                 self.words_fallen += 1
-                if self.words_fallen >= 5:
+                if self.words_fallen >= self.max_num_of_fallen_words:
                     self.reset_game()
                     self.word_typing_mode.reset_game_due_to_fallen_words()
                     break
@@ -99,6 +102,3 @@ class WordAnimationBox(ctk.CTkLabel):
         with open(filename, 'r') as file:
             words = file.readlines()
         return [word.strip() for word in words]
-
-    def is_colliding(self, x1, y1, x2, y2):
-        return abs(x1 - x2) < 100 and abs(y1 - y2) < 30

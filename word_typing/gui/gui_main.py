@@ -39,7 +39,7 @@ class GUI(ctk.CTkFrame):
         self.title_label.pack(expand=True, pady=[50, 50])
         self.word_animation_box = WordAnimationBox(
             # Pass word_typing_mode here
-            left_frame, self.word_typing_mode, canvas_width=700, canvas_height=500, font_size=30)
+            left_frame, self.word_typing_mode, canvas_width=900, canvas_height=550, font_size=20)
 
         self.input_textbox = InputTextbox(left_frame)
         self.input_textbox.pack(pady=(10, 50), padx=10)

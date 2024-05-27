@@ -18,9 +18,13 @@ class WordTypingMode:
         self.correct_words_typed = 0
         self.incorrect_words_typed = 0
         self.current_typing_index = 0
-        self.game_reset = False  # Flag to check if the game is in a reset state
-        self.words_for_next_level = 20
+        self.game_reset = False
+
+        self.words_for_next_level = 5
+        self.increment_of_next_level = 5
         self.level = 1
+        self.word_speed_change_factor = 0.02
+        self.word_generation_speed_change_factor = 30
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
@@ -50,6 +54,9 @@ class WordTypingMode:
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
             self.gui.word_animation_box.remove_word_from_canvas(input_word)
+            print(self.gui.word_animation_box.word_labels)
+            # self.gui.word_animation_box.word_labels[len(
+            #     self.gui.word_animation_box.word_labels)-1][1].configure(color="green")
 
         self.update_level()
 
@@ -57,9 +64,10 @@ class WordTypingMode:
         if self.correct_words_typed >= self.words_for_next_level:
             if self.level < 5:
                 self.level += 1
-                self.words_for_next_level += 20
+                self.words_for_next_level += self.increment_of_next_level
                 self.change_background_color()
-                self.gui.word_animation_box.speed += 0.01
+                self.gui.word_animation_box.word_moving_speed += self.word_speed_change_factor
+                self.gui.word_animation_box.word_generating_speed -= self.word_generation_speed_change_factor
             self.logger.debug(f"LEVEL UP! New Level: {self.level}")
 
         self.update_speed_label()
@@ -87,9 +95,10 @@ class WordTypingMode:
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
         self._reset_game_state()
-        self.gui.speed_label.configure(text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
+        self.gui.speed_label.configure(
+            text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
         self.gui.speed_label.configure(fg_color='#71c788')
-        self.gui.word_animation_box.speed = 0.1
+        self.gui.word_animation_box.word_moving_speed = 0.1
         self.level = 1
         self.words_for_next_level = 20
         self.logger.debug("RESET")
@@ -107,9 +116,10 @@ class WordTypingMode:
             self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
             self.running = False
             self.game_reset = True
-            self.gui.speed_label.configure(text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
+            self.gui.speed_label.configure(
+                text="Level: 1 \nCorrect words: 0\nNext level: 0")  # Reset speed label
             self.gui.speed_label.configure(fg_color='#71c788')
-            self.gui.word_animation_box.speed = 0.1
+            self.gui.word_animation_box.word_moving_speed = 0.1
             self.level = 1
             self.words_for_next_level = 20
             self.logger.debug("RESET GAME STATS")
