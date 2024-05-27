@@ -18,6 +18,7 @@ class WordAnimationBox(ctk.CTkLabel):
         self.font_size = font_size
         self.word_typing_mode = word_typing_mode
         self.game_started = False
+        self.speed = 0.1
 
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
@@ -62,7 +63,7 @@ class WordAnimationBox(ctk.CTkLabel):
         if not self.game_started:
             return
         for i, label_id in enumerate(self.word_labels):
-            self.canvas.move(label_id, 0, 0.1)
+            self.canvas.move(label_id, 0, self.speed)
             _, y = self.canvas.coords(label_id)
             if y > self.canvas_height:
                 self.canvas.delete(label_id)
