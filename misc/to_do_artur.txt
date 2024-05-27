@@ -20,6 +20,7 @@
   - wpm, 
   - ile slow napisal user
   - fajna może być też lista słów ktore sie udalo napisac z zaznaczeniem ile razy kazde slowko bylo (ale to do przekminienia jescze)
+- zrobić łącznie 7 poziomów (wydaje mi sie ze taka ilosc bedzie idealnie) no i pobawic sie balansem gierki (odpowiednio szybka zmiana predkosci przy levelach itp, zeby bylo coraz trudniej ale grywalnie)
 
 
 
