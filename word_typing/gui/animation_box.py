@@ -100,6 +100,7 @@ class AnimationBox(ctk.CTkLabel):
         self.word_labels.clear()
         self.generated_words.clear()
 
+    @staticmethod
     def read_words(db_path):
         words = []
         try:

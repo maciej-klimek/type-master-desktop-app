@@ -15,6 +15,7 @@
   + to co ustaliliśmy że usuwa sie tylko jesli user faktycznie zacząl probowac je pisac (np sprawdaz czy przynajmniej polowa stringa sie zgadza)
 - jak user zacznie wpisywac cos zle to text w inpucie zmienia kolor na czerwony (tak jak w full acc mode)
 - ekran przegranej plus że jak user przegra no to pokazuje mu sie jakie staty sie mu udało wykręcic,
+- fajniejszy ten label ze statami (jakos sie UI pobawic troche), fajnie by było też jakby po gierce sie dało wyświetlisc liste ile razy uset napisac każde slowo
 - ostatnie słowo które leci w dół ma zawsze inny kolor niż reszta (np zielony albo cokolwiek co ci siądzie)
 - użyć gdzieś threadingu w wordtypingmode (np do ładowania danych z tekstu, liczenia stat, żeby cos bylo po prostu bo chcialbym kilka przykładow do prezki miec)
 - staty - imo tak jak bylo zaplanowane czyli po lewej od anim_boxa:
