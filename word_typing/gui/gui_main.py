@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from word_typing.gui.input_textbox import InputTextbox
+from word_typing.gui.stat_label import StatLabel
 from word_typing.gui.reset_button import ResetButton
 from word_typing.gui.animation_box import AnimationBox
 from word_typing.gui.speed_label import SpeedLabel
@@ -37,6 +38,7 @@ class GUI(ctk.CTkFrame):
 
         self.title_label = TitleLabel(top_frame)
         self.title_label.pack(expand=True, pady=[50, 50])
+
         self.animation_box = AnimationBox(
             left_frame, self.word_typing_mode_instance)
 

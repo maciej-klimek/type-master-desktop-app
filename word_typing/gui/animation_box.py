@@ -70,6 +70,10 @@ class AnimationBox(ctk.CTkLabel):
             self.canvas.move(label_id, 0, self.word_moving_speed)
             _, y = self.canvas.coords(label_id)
             if y > self.canvas_height:
+                fallen_word = self.canvas.itemcget(label_id, "text")
+                input_word = self.word_typing_mode.gui.input_textbox.get("1.0", "end-1c").strip()
+                if input_word.startswith(fallen_word[:len(input_word)]):
+                    self.word_typing_mode.gui.input_textbox.delete("1.0", "end")
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)
                 self.words_fallen += 1

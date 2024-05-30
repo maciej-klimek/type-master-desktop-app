@@ -53,12 +53,14 @@ class WordTypingMode:
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
             self.gui.animation_box.remove_word_from_canvas(input_word)
+        elif any(word.startswith(input_word) for word in self.gui.animation_box.generated_words):
+            self.gui.input_textbox.configure(fg_color="red")
 
         self.update_level()
 
     def update_level(self):
         if self.correct_words_typed >= self.words_for_next_level:
-            if self.level < 5:
+            if self.level < 7:
                 self.level += 1
                 self.words_for_next_level += self.increment_of_next_level
                 self.change_background_color()
@@ -72,15 +74,17 @@ class WordTypingMode:
         level_colors = {
             1: '#71c788',  # Green
             2: '#6699FF',  # Blue
-            3: '#FFFF66',  # Yellow
-            4: '#FFB266',  # Orange
-            5: '#FF6666'  # Red
+            3: '#66FFFF',  # Cyan
+            4: '#FFFF66',  # Yellow
+            5: '#FFB266',  # Orange
+            6: '#FF66FF',  # Magenta
+            7: '#FF6666'  # Red
         }
         new_color = level_colors.get(self.level, '#71c788')
         self.gui.speed_label.configure(fg_color=new_color)
 
     def update_speed_label(self):
-        if self.level == 5:
+        if self.level == 7:
             self.gui.speed_label.configure(
                 text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: MAX LEVEL")
         else:
@@ -111,6 +115,7 @@ class WordTypingMode:
             self.game_reset = True
             self.gui.speed_label.configure(fg_color='#71c788')
             self.level = 1
+            self.words_for_next_level = 20
             self.logger.debug("RESET GAME STATS")
 
         except Exception as e:
