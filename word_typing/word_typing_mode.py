@@ -53,8 +53,6 @@ class WordTypingMode:
             self.gui.input_textbox.delete("1.0", "end")
             self.correct_words_typed += 1
             self.gui.animation_box.remove_word_from_canvas(input_word)
-        elif any(word.startswith(input_word) for word in self.gui.animation_box.generated_words):
-            self.gui.input_textbox.configure(fg_color="red")
 
         self.update_level()
 
