@@ -48,6 +48,13 @@ class WordTypingMode:
     def on_key_press(self, event):
         input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
         self.logger.debug(input_word)
+
+        is_prefix = any(word.startswith(input_word) for word in self.gui.animation_box.generated_words)
+
+        if is_prefix:
+            self.gui.input_textbox.configure(text_color="white")
+        else:
+            self.gui.input_textbox.configure(text_color="red")
         if input_word in self.gui.animation_box.generated_words:
             self.gui.animation_box.generated_words.remove(input_word)
             self.gui.input_textbox.delete("1.0", "end")
