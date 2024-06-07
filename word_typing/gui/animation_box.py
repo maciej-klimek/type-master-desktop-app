@@ -66,10 +66,19 @@ class AnimationBox(ctk.CTkLabel):
     def slide_words_through_canvas(self):
         if not self.game_started:
             return
+        lowest_word_label = None
+        lowest_y = -1
         for i, label_id in enumerate(self.word_labels):
             self.canvas.move(label_id, 0, self.word_moving_speed)
             _, y = self.canvas.coords(label_id)
+            if y > lowest_y:
+                lowest_y = y
+                lowest_word_label = label_id
             if y > self.canvas_height:
+                fallen_word = self.canvas.itemcget(label_id, "text")
+                input_word = self.word_typing_mode.gui.input_textbox.get("1.0", "end-1c").strip()
+                if input_word.startswith(fallen_word[:len(input_word)]):
+                    self.word_typing_mode.gui.input_textbox.delete("1.0", "end")
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)
                 self.words_fallen += 1
@@ -77,8 +86,9 @@ class AnimationBox(ctk.CTkLabel):
                     self.reset_game_state()
                     self.word_typing_mode.end_game()
                     break
+        if lowest_word_label is not None:
+            self.canvas.itemconfig(lowest_word_label, fill="yellow")
         self.canvas.after(1, self.slide_words_through_canvas)
-
     def remove_word_from_canvas(self, word):
         for i, label_id in enumerate(self.word_labels):
             if self.canvas.itemcget(label_id, "text") == word:

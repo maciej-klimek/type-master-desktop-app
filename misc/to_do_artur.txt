@@ -11,7 +11,7 @@
   bo wiesz jak potem sie testuje gierke to łatwiej zmieniac wartosci na gorze klasy niz szukac w jakiej funkcji to sie dzieje
 
 # Taski, najlepiej w takiej kolejności imo:
-- jak słówko wypadnie poza ekran to czyści sie inputbox (tak bedzie sie wygodniej grac imo, wiesz user zaczyna pisac jedno slowo, nie wyszlo mu to odrazu moze zaczac pisac kolejne bez spamowania backspaca)
+- *jak słówko wypadnie poza ekran to czyści sie inputbox (tak bedzie sie wygodniej grac imo, wiesz user zaczyna pisac jedno slowo, nie wyszlo mu to odrazu moze zaczac pisac kolejne bez spamowania backspaca)
   + to co ustaliliśmy że usuwa sie tylko jesli user faktycznie zacząl probowac je pisac (np sprawdaz czy przynajmniej polowa stringa sie zgadza)
 - jak user zacznie wpisywac cos zle to text w inpucie zmienia kolor na czerwony (tak jak w full acc mode)
 - ekran przegranej plus że jak user przegra no to pokazuje mu sie jakie staty sie mu udało wykręcic,
