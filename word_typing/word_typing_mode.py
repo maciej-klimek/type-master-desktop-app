@@ -120,6 +120,8 @@ class WordTypingMode:
             self.running = False
             self.game_reset = True
             self.gui.level_label.configure(fg_color='#71c788')
+            self.gui.health_label.configure(
+                text="[   ] [   ] [   ] [   ] [   ]")
             self.level = 1
             self.words_for_next_level = 20
             self.logger.debug("RESET GAME STATS")

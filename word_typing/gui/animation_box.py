@@ -27,7 +27,7 @@ class AnimationBox(ctk.CTkLabel):
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
 
-        self.canvas.pack(pady=[0, 20])
+        self.canvas.pack(pady=[0, 10])
 
         self.word_labels = []
         self.word_positions = []
@@ -84,6 +84,12 @@ class AnimationBox(ctk.CTkLabel):
                 self.canvas.delete(label_id)
                 self.word_labels.pop(i)
                 self.words_fallen += 1
+                health_string = ""
+                health_string = "[ x ] " * self.words_fallen
+                health_string += "[   ] " * \
+                    (self.max_num_of_fallen_words - self.words_fallen)
+                self.word_typing_mode.gui.health_label.configure(
+                    text=health_string)
                 if self.words_fallen >= self.max_num_of_fallen_words:
                     self.reset_game_state()
                     self.word_typing_mode.end_game()

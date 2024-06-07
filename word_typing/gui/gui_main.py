@@ -5,6 +5,7 @@ from word_typing.gui.reset_button import ResetButton
 from word_typing.gui.animation_box import AnimationBox
 from word_typing.gui.level_label import LevelLabel
 from word_typing.gui.title_label import TitleLabel
+from word_typing.gui.health_label import HealthLabel
 from config import BACKGROUND_COLOR
 
 ctk.set_default_color_theme("green")
@@ -41,6 +42,9 @@ class GUI(ctk.CTkFrame):
 
         self.animation_box = AnimationBox(
             left_frame, self.word_typing_mode_instance)
+
+        self.health_label = HealthLabel(left_frame)
+        self.health_label.pack()
 
         self.input_textbox = InputTextbox(left_frame)
         self.input_textbox.pack(pady=(10, 50), padx=10)
