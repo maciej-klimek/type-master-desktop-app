@@ -12,4 +12,3 @@ class TextLabel(ctk.CTkLabel):
             fg_color=("grey18"),
             corner_radius=8,
         )
-        self.pack(fill="both", expand=True, ipady=50, ipadx=50)

@@ -3,7 +3,7 @@ from word_typing.gui.input_textbox import InputTextbox
 from word_typing.gui.stat_label import StatLabel
 from word_typing.gui.reset_button import ResetButton
 from word_typing.gui.animation_box import AnimationBox
-from word_typing.gui.speed_label import SpeedLabel
+from word_typing.gui.level_label import LevelLabel
 from word_typing.gui.title_label import TitleLabel
 from config import BACKGROUND_COLOR
 
@@ -45,8 +45,8 @@ class GUI(ctk.CTkFrame):
         self.input_textbox = InputTextbox(left_frame)
         self.input_textbox.pack(pady=(10, 50), padx=10)
 
+        self.level_label = LevelLabel(right_frame)
+        self.level_label.pack(pady=(10, 20), padx=10, ipadx=20, ipady=20)
+
         self.reset_button = ResetButton(right_frame)
         self.reset_button.pack(pady=(10, 10), padx=10)
-
-        self.speed_label = SpeedLabel(right_frame)
-        self.speed_label.pack(pady=(10, 20), padx=10)

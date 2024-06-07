@@ -16,4 +16,3 @@ class SpeedLabel(ctk.CTkButton):
             hover=False
 
         )
-        self.pack(side="left", ipadx=5, ipady=20)

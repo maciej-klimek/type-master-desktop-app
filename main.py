@@ -45,9 +45,10 @@ class MainMenu(ctk.CTkFrame):
         self.root.title("TypeMaster")
         self.root.geometry("1400x900")
         self.configure(fg_color=BACKGROUND_COLOR)
-        self.settings_image = ctk.CTkImage(Image.open("settings_icon.png"))
+        self.settings_image = ctk.CTkImage(
+            Image.open("images/settings_icon.png"))
         self.logo_image = ctk.CTkImage(
-            Image.open("type_master_logo.png"), size=(600, 200))
+            Image.open("images/type_master_logo.png"), size=(600, 200))
 
         self.create_widgets()
 

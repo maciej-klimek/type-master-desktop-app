@@ -36,14 +36,24 @@ class GUI(ctk.CTkFrame):
         self.root.mainloop()
 
     def create_widgets(self):
-        print(self.title)
         self.title_label = TitleLabel(
             self.main_frame, text=self.title, text_color=self.title_color)
+        self.title_label.pack(fill="both", expand=True, pady=[0, 50])
+
         self.text_label = TextLabel(self.main_frame)
+        self.text_label.pack(fill="both", expand=True, ipady=50, ipadx=50)
+
         self.time_label = TimeLabel(self.main_frame)
+        self.time_label.pack()
 
         self.input_textbox = InputTextbox(self.main_frame)
+        self.input_textbox.pack(expand=True, pady=[50, 0], padx=50)
+
         self.accuracy_label = AccuracyLabel(self.stats_frame)
+        self.accuracy_label.pack(pady=[5, 30])
 
         self.speed_label = SpeedLabel(self.stats_frame)
+        self.speed_label.pack(side="left", ipadx=5, ipady=20)
+
         self.reset_button = ResetButton(self.main_frame)
+        self.reset_button.pack(side="right", padx=[0, 50], pady=[50, 0])

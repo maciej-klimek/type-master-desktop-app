@@ -12,4 +12,3 @@ class TimeLabel(ctk.CTkLabel):
             justify="right",
             text_color="grey30",
         )
-        self.pack()

@@ -12,4 +12,3 @@ class AccuracyLabel(ctk.CTkLabel):
             justify="left",
             text_color="grey30",
         )
-        self.pack(pady=[5, 30])

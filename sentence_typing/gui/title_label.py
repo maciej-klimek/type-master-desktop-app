@@ -9,4 +9,3 @@ class TitleLabel(ctk.CTkLabel):
             font=("Ubuntu", 30),
             justify='center',
         )
-        self.pack(fill="both", expand=True, pady=[0, 50])

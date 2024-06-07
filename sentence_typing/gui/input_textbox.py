@@ -14,4 +14,3 @@ class InputTextbox(ctk.CTkTextbox):
             border_width=2,
             wrap="word",
         )
-        self.pack(expand=True, pady=[50, 0], padx=50)
