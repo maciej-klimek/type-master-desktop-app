@@ -35,12 +35,14 @@ class WordTypingMode:
         if self.game_reset:  # Check if the game is in a reset state
             self.logger.debug("START AFTER RESET")
             self.running = True
-            self.gui.animation_box.start_game()
+            game_thread = threading.Thread(target=self.gui.animation_box.start_game)
+            game_thread.start()
             self.game_reset = False  # Reset the flag
         else:
             self.logger.debug("START")
             self.running = True
-            self.gui.animation_box.start_game()
+            game_thread = threading.Thread(target=self.gui.animation_box.start_game)
+            game_thread.start()
 
         self.gui.level_label.configure(
             text="Level: 1 \nCorrect words: 0\nNext level: 0")
