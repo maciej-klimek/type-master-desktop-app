@@ -24,6 +24,7 @@ class WordTypingMode:
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
         self.gui.reset_button.bind("<Button-1>", self.on_reset)
+        self.gui.input_textbox.configure(state="disabled")
         self.gui.input_textbox.bind("<Return>", self.on_start)
 
         self.gui.run()
@@ -32,13 +33,16 @@ class WordTypingMode:
         if self.running:
             return
 
-        if self.game_reset:  # Check if the game is in a reset state
+        self.gui.input_textbox.configure(state="normal")
+        self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
+
+        if self.game_reset:
             self.logger.debug("START AFTER RESET")
             self.running = True
             game_thread = threading.Thread(
                 target=self.gui.animation_box.start_game)
             game_thread.start()
-            self.game_reset = False  # Reset the flag
+            self.game_reset = False
         else:
             self.logger.debug("START")
             self.running = True
@@ -60,6 +64,7 @@ class WordTypingMode:
             self.gui.input_textbox.configure(text_color="white")
         else:
             self.gui.input_textbox.configure(text_color="red")
+
         if input_word in self.gui.animation_box.generated_words:
             self.gui.animation_box.generated_words.remove(input_word)
             self.gui.input_textbox.delete("1.0", "end")
@@ -102,6 +107,7 @@ class WordTypingMode:
                 text=f"Level: {self.level} \nCorrect words: {self.correct_words_typed}\nNext level: {self.words_for_next_level}")
 
     def on_reset(self, event=None):
+        self.gui.input_textbox.configure(state="disabled")
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
         self.reset_game_state()
