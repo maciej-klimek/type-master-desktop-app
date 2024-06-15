@@ -47,7 +47,6 @@ class FullAccuracyMode():
                 )
                 self.gui.text_label.configure(text=self.hidden_correct_text)
 
-                # Print the sentence obtained from the database
                 self.logger.debug(f"Sentence from database: {
                                   self.correct_text}")
             else:
