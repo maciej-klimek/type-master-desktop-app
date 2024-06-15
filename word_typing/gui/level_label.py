@@ -8,7 +8,7 @@ class LevelLabel(ctk.CTkLabel):
             self,
             width=150,
             text="Level: 1 \nCorrect words: 0\nNext level: 0",
-            font=("Ubuntu", 16),
+            font=("Cascadia Code Bold", 16),
             corner_radius=8,
             justify="left",
             fg_color="#71c788",

@@ -7,7 +7,7 @@ class AccuracyLabel(ctk.CTkLabel):
         AccuracyLabel.configure(
             self,
             text="Accuracy: 0%",
-            font=("Ubuntu", 16),
+            font=("Cascadia Code Bold", 16),
             corner_radius=8,
             justify="left",
             text_color="grey30",

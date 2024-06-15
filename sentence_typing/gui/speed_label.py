@@ -7,7 +7,7 @@ class SpeedLabel(ctk.CTkButton):
         SpeedLabel.configure(
             self,
             text="WPM: 0\n CPM: 0\nCPS: 0",
-            font=("Ubuntu", 16),
+            font=("Cascadia Code Bold", 16),
             text_color="grey30",
             fg_color="grey14",
             corner_radius=8,

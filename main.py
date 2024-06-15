@@ -10,13 +10,14 @@ ctk.set_appearance_mode("Dark")
 
 
 class ModeButton(ctk.CTkButton):
+
     def __init__(self, master=None, **kwargs):
         self.command = kwargs.pop("command", None)
         super().__init__(master, **kwargs)
         self.active = False
         self.configure(
             height=40,
-            font=("Ubuntu", 14),
+            font=("Cascadia Code Bold", 14),
             fg_color="grey18",
             border_color="grey30",
             border_width=2,

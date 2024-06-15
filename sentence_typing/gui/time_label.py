@@ -7,7 +7,7 @@ class TimeLabel(ctk.CTkLabel):
         TimeLabel.configure(
             self,
             text="Time elapsed: 0 seconds",
-            font=("Ubuntu", 16),
+            font=("Cascadia Code Bold", 16),
             corner_radius=8,
             justify="right",
             text_color="grey30",

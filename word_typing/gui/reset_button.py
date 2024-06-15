@@ -8,7 +8,7 @@ class ResetButton(ctk.CTkButton):
             self,
             height=40,
             text="Reset",
-            font=("Ubuntu", 16),
+            font=("Cascadia Code Bold", 16),
             fg_color="grey18",
             text_color="white",
             border_color="grey30",

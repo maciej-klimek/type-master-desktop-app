@@ -7,7 +7,7 @@ class TitleLabel(ctk.CTkLabel):
         super().__init__(master, **kw)
         self.configure(
             self,
-            font=("Ubuntu", 30),
+            font=("Cascadia Code Bold", 35),
             justify='center',
             text="Word Typing Game Mode",
             text_color=WTG_COLOR
