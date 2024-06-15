@@ -29,28 +29,31 @@ class GUI(ctk.CTkFrame):
     def create_widgets(self):
 
         top_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
-        top_frame.pack(side="top")
+        top_frame.pack(side="top", fill="x")
 
-        left_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
-        left_frame.pack(side="left", padx=(0, 10))
+        bottom_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
+        bottom_frame.pack(side="top", fill="x")
 
-        right_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
-        right_frame.pack(side="right", padx=(10, 0))
+        # Configure grid weights to ensure proper spacing
+        bottom_frame.grid_columnconfigure(0, weight=0)  # left space
+        bottom_frame.grid_columnconfigure(1, weight=1)  # center frame
+        # right space (level_label and reset_button)
+        bottom_frame.grid_columnconfigure(2, weight=0)
 
         self.title_label = TitleLabel(top_frame)
-        self.title_label.pack(expand=True, pady=[50, 50])
+        self.title_label.pack(pady=[0, 50])
 
         self.animation_box = AnimationBox(
-            left_frame, self.word_typing_mode_instance)
+            top_frame, self.word_typing_mode_instance)
 
-        self.health_label = HealthLabel(left_frame)
-        self.health_label.pack()
+        self.reset_button = ResetButton(bottom_frame)
+        self.reset_button.grid(row=1, column=0)
 
-        self.input_textbox = InputTextbox(left_frame)
-        self.input_textbox.pack(pady=(10, 50), padx=10)
+        self.health_label = HealthLabel(bottom_frame)
+        self.health_label.grid(row=0, column=1, pady=[10, 0])
 
-        self.level_label = LevelLabel(right_frame)
-        self.level_label.pack(pady=(10, 20), padx=10, ipadx=20, ipady=20)
+        self.input_textbox = InputTextbox(bottom_frame)
+        self.input_textbox.grid(row=1, column=1)
 
-        self.reset_button = ResetButton(right_frame)
-        self.reset_button.pack(pady=(10, 10), padx=10)
+        self.level_label = LevelLabel(bottom_frame)
+        self.level_label.grid(row=1, column=2, ipadx=10, ipady=10, sticky="n")

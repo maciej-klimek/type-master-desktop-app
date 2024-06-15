@@ -27,7 +27,7 @@ class AnimationBox(ctk.CTkLabel):
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
 
-        self.canvas.pack(pady=[0, 10])
+        self.canvas.pack()
 
         self.word_labels = []
         self.word_positions = []

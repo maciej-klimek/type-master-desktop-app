@@ -44,7 +44,7 @@ class MainMenu(ctk.CTkFrame):
         super().__init__(parent)
         self.root = parent
         self.root.title("TypeMaster")
-        self.root.geometry("1400x900")
+        self.root.geometry("1400x1000")
         self.configure(fg_color=BACKGROUND_COLOR)
         self.settings_image = ctk.CTkImage(
             Image.open("images/settings_icon.png"))
