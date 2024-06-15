@@ -52,6 +52,7 @@ class WordTypingMode:
 
         self.gui.level_label.configure(
             text="Level: 1 \nCorrect words: 0\nNext level: 0")
+        self.gui.level_label.configure(fg_color='#71c788')
 
     def on_key_press(self, event):
         input_word = self.gui.input_textbox.get("1.0", "end-1c").strip()
@@ -127,7 +128,6 @@ class WordTypingMode:
             self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
             self.running = False
             self.game_reset = True
-            self.gui.level_label.configure(fg_color='#71c788')
             self.gui.health_label.configure(
                 text="[   ] [   ] [   ] [   ] [   ]")
             self.level = 1
