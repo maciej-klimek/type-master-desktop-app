@@ -1,0 +1,25 @@
+1. O jakie aspekty biblioteka customtkinter rozszerza podstawową wersje tkintera? (zaznacz wszystkie poprawne odpowiedzi)
+- Znacząco poprawia wydajność i szybkość ładowania widgetów
+- Szersze możliwości konfiguracji i dostosowywania widgetów [prawda]
+- Narzędzia do łatwiejszego zapewnienia responsywności w aplikacjach
+- Automatyczne dopasowanie wyglądu aplikacji do motywu systemu na którym aplikacja pracuje [prawda]
+
+Jakie są dostępne poziomu loggingu w pythonie?
+- DEBUG, INFO, ERROR, CRITICAL
+- DEBUG, MESSAGE, WARNING, ERROR, CRITICAL
+- DEBUG, INFO, WARNING, ERROR, CRITICAL
+- DEBUG, INFO, ERROR, CRITICAL, FATAL
+
+Jaka jest podstawowa różnica między Daemon Thread a Non-Daemon Thread?
+- Daemon Thread automatycznie odzyskuje zasoby systemowe po zakończeniu, podczas gdy Non-daemon Thread wymaga ręcznego zwalniania zasobów przez programiste
+- Daemon Thread jest uruchamiany przez główny thread aplikacji, natomiast Non-Daemon Thread jest uruchamiany przez system operacyjny na poziomie jądra
+- Daemon Thread ma priorytet wyższy od Non-daemon Thread, dlatego jest używany do zadań wymagających natychmiastowej reakcji
+- Daemon Thread jest automatycznie kończony przy zamknięciu programu, Non-daemon Thread musi zakończyć swoje działanie, żeby program mógł się zamknąć [prawda]
+
+Zaznacz prawdziwe zdania charakteryzujące architekture modularną aplikacji:
+- Architekura modularna polega na podziele aplikacji na niezależne moduły, które mogą być rozwijane, testowane i wdrażane oddzielnie [prawda]
+- Architektura modularna znacząco utrudnia skalowanie projektu i dodawanie nowych funkcjonalności
+- Moduły aplikacji modulnych mogą być wielokrotnie wykorzystywane w różnych projektach [prawda]
+- Moduły w aplikacji modularnej, mimo że stanowią w pełni odrębne byty, muszą być zawsze uruchamiany jednocześnie w celu zapewnienia poprawnej synchronizacji
+
+
