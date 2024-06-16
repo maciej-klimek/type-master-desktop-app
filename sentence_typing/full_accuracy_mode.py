@@ -47,8 +47,7 @@ class FullAccuracyMode():
                 )
                 self.gui.text_label.configure(text=self.hidden_correct_text)
 
-                self.logger.debug(f"Sentence from database: {
-                                  self.correct_text}")
+                self.logger.debug(f"Sentence from database: {self.correct_text}")
             else:
                 self.logger.error("No sentences found in the database.")
 

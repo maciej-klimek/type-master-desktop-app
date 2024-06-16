@@ -137,7 +137,7 @@ class DatabaseManager(ctk.CTk):
 
     def view_records(self):
         self.output_text.delete(1.0, ctk.END)
-        table = self.table.get()
+        table = self.table.get(0.0, "end")
         records = get_all_records(table)
         if records:
             for record in records:
@@ -172,8 +172,7 @@ class DatabaseManager(ctk.CTk):
             new_entry = dialog.result
             if new_entry:
                 update_record(table, record_id, new_entry)
-                messagebox.showinfo("Success", f"Record ID {
-                                    record_id} updated.")
+                messagebox.showinfo("Success", f"Record ID {record_id} updated.")
                 self.view_records()
 
     def delete_record(self):
