@@ -120,14 +120,19 @@ class MeasureAccuracyMode():
                 time_elapsed = time.time() - start_time
                 if time_elapsed > 0:
                     pass
+                    # --------------------------------------- ZADANIE 3.3 ------------------------------------------ #
+                    # Odkomentuj żeby wyświetlać wartość accuracy
+                    # self.gui.accuracy_label.configure(text=f"Accuracy: {self.accuracy:.2f}%")
+                    #
+                    #
                     # --------------------------------------- ZADANIE 4.2 ------------------------------------------ #
-
+                    #
                     # Napisz tutja kod który pod zmiennymi wpm (words per minute), cps(characters per second), cpm(characters per minute) policzy wartości tych statystyk
                     # Nastepnie skonfiguruj widgety self.gui.speed_label, self.gui.accuracy_label, self.gui.time_label tak żeby wyświetlały te wartości
-
+                    #
                     # --------------------------------------- ZADANIE 4.3 ------------------------------------------ #
                     # Odkomentuj ten kod żeby dodać ładne kolori :)
-
+                    #
                     # if wpm > 50:
                     #     self.gui.speed_label.configure(
                     #         text_color=self.gui.GRADE_COLOR_PALLETE["great"])
@@ -159,7 +164,6 @@ class MeasureAccuracyMode():
                     # else:
                     #     self.gui.accuracy_label.configure(
                     #         text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
-
                     # -------------------------------------------------------------------------------------------- #
 
         except Exception as e:
