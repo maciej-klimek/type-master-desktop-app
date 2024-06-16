@@ -21,7 +21,8 @@ python.exe .\main.py
 ```
 <br></br>
 ## Some screenshots from the app:
-![TypeMaster](https://github.com/maciej-klimek/type-master-desktop-app/blob/main/images/word_typing_ss.PNG)
+![obraz](https://github.com/maciej-klimek/type-master-desktop-app/assets/87934529/c2d64e44-dc45-480d-9b8f-d60aa8526564)
+
 <br></br>
 ![TypeMaster](https://github.com/maciej-klimek/type-master-desktop-app/blob/main/images/sentence_typing_ss.PNG)
 
