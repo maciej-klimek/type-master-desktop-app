@@ -1,0 +1,9 @@
+Do czego służy bibliotek CustomTkinter?
+
+Jak działa logging?
+
+Jaka jest różnica między threadingiem Daemon a Non-Daemon?
+
+Jak profesjonalnie nazywają się elementy, które widzi użytkownik w aplikacji okienkowej(Chodzi o widgety)
+
+
