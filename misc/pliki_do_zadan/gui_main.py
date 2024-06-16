@@ -49,12 +49,11 @@ class GUI(ctk.CTkFrame):
         self.input_textbox = InputTextbox(self.main_frame)
         self.input_textbox.pack(expand=True, pady=[50, 0], padx=50)
 
-        # --------------------------------------- ZADANIE 2 ------------------------------------------ #
-        #
-        # Tutaj (na wzór innych widgetów) stworz instancje speed_label i accuracy_label
-        # i spakuj je w odpowiedni sposób (według uznania) do main_frame (atrubuty padx/y, expand itp)
-        #
-        # -------------------------------------------------------------------------------------------- #
+        self.accuracy_label = AccuracyLabel(self.stats_frame)
+        self.accuracy_label.pack(pady=[5, 30])
+
+        self.speed_label = SpeedLabel(self.stats_frame)
+        self.speed_label.pack(side="left", ipadx=5, ipady=20)
 
         self.reset_button = ResetButton(self.main_frame)
         self.reset_button.pack(side="right", padx=[0, 50], pady=[50, 0])

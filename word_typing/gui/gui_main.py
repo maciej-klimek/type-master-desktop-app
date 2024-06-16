@@ -34,10 +34,8 @@ class GUI(ctk.CTkFrame):
         bottom_frame = ctk.CTkFrame(self.frame, fg_color=BACKGROUND_COLOR)
         bottom_frame.pack(side="top", fill="x")
 
-        # Configure grid weights to ensure proper spacing
-        bottom_frame.grid_columnconfigure(0, weight=0)  # left space
-        bottom_frame.grid_columnconfigure(1, weight=1)  # center frame
-        # right space (level_label and reset_button)
+        bottom_frame.grid_columnconfigure(0, weight=0)
+        bottom_frame.grid_columnconfigure(1, weight=1)
         bottom_frame.grid_columnconfigure(2, weight=0)
 
         self.title_label = TitleLabel(top_frame)

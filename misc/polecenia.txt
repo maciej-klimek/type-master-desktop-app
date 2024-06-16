@@ -1,0 +1,11 @@
+1. **Zrobić widget do statów i accuracy**
+   - Utwórz nowy widget, który będzie wyświetlał statystyki użytkownika, takie jak dokładność (accuracy).
+
+2. **Dodać widget do głównego UI, aby się wyświetlał**
+   - Zintegruj nowo utworzony widget z głównym interfejsem użytkownika, aby był widoczny podczas działania aplikacji.
+
+3. **Dopisać metodę odpowiedzialną za obliczanie dokładności**
+   - Dodaj metodę `calculate_accuracy` do kodu, która będzie odpowiedzialna za obliczanie dokładności wpisywania przez użytkownika.
+
+4. **Napisać metodę odpowiedzialną za obliczanie statystyk użytkownika**
+   - Napisz metodę, która będzie zbierała i obliczała różne statystyki użytkownika, takie jak liczba poprawnych słów na minutę, liczba błędów itp.

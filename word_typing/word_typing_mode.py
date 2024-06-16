@@ -23,7 +23,7 @@ class WordTypingMode:
         self.word_generation_speed_change_factor = 200
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
-        self.gui.reset_button.bind("<Button-1>", self.on_reset)
+        # self.gui.reset_button.bind("<Button-1>", self.on_reset)
         self.gui.input_textbox.configure(state="disabled")
         self.gui.input_textbox.bind("<Return>", self.on_start)
 
@@ -79,14 +79,14 @@ class WordTypingMode:
             if self.level < 7:
                 self.level += 1
                 self.words_for_next_level += self.increment_of_next_level
-                self.change_background_color()
+                self.change_label_color()
                 self.gui.animation_box.word_moving_speed += self.word_speed_change_factor
                 self.gui.animation_box.word_generating_speed -= self.word_generation_speed_change_factor
             self.logger.debug(f"LEVEL UP! New Level: {self.level}")
 
         self.update_level_label()
 
-    def change_background_color(self):
+    def change_label_color(self):
         level_colors = {
             1: '#71c788',  # Green
             2: '#6699FF',  # Blue

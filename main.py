@@ -68,17 +68,17 @@ class MainMenu(ctk.CTkFrame):
         mode_buttons_frame.place(relx=0.51, rely=1.0, anchor="s", y=-30)
         self.show_title_screen()
 
-        self.btn_full_accuracy = ModeButton(
-            mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode, text_color=FAC_COLOR)
-        self.btn_full_accuracy.pack(side="left", padx=10)
+        # self.btn_full_accuracy = ModeButton(
+        #     mode_buttons_frame, text="Full Typing Accuracy Mode", command=self.open_full_accuracy_mode, text_color=FAC_COLOR)
+        # self.btn_full_accuracy.pack(side="left", padx=10)
 
         self.btn_measure_accuracy = ModeButton(
             mode_buttons_frame, text="Measure Typing Accuracy Mode", command=self.open_measure_accuracy_mode, text_color=MAC_COLOR)
         self.btn_measure_accuracy.pack(side="left", padx=10)
 
-        self.btn_word_typing = ModeButton(
-            mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode, text_color=WTG_COLOR)
-        self.btn_word_typing.pack(side="left", padx=10)
+        # self.btn_word_typing = ModeButton(
+        #     mode_buttons_frame, text="Word Typing Mode", command=self.open_word_game_mode, text_color=WTG_COLOR)
+        # self.btn_word_typing.pack(side="left", padx=10)
 
         self.btn_database_manager = ctk.CTkButton(
             mode_buttons_frame,
@@ -97,20 +97,20 @@ class MainMenu(ctk.CTkFrame):
             self.mode_frame, image=self.logo_image, text="")
         title_label.pack(expand=True, pady=[0, 50], padx=100)
 
-    def open_full_accuracy_mode(self):
-        self.update_button_states(self.btn_full_accuracy)
-        self.destroy_mode_frame_content()
-        FullAccuracyMode(self.mode_frame)
+    # def open_full_accuracy_mode(self):
+    #     self.update_button_states(self.btn_full_accuracy)
+    #     self.destroy_mode_frame_content()
+    #     FullAccuracyMode(self.mode_frame)
 
     def open_measure_accuracy_mode(self):
         self.update_button_states(self.btn_measure_accuracy)
         self.destroy_mode_frame_content()
         MeasureAccuracyMode(self.mode_frame)
 
-    def open_word_game_mode(self):
-        self.update_button_states(self.btn_word_typing)
-        self.destroy_mode_frame_content()
-        WordTypingMode(self.mode_frame)
+    # def open_word_game_mode(self):
+    #     self.update_button_states(self.btn_word_typing)
+    #     self.destroy_mode_frame_content()
+    #     WordTypingMode(self.mode_frame)
 
     def open_database_manager(self):
         ctk.set_appearance_mode("Dark")
@@ -119,9 +119,9 @@ class MainMenu(ctk.CTkFrame):
         app.mainloop()
 
     def update_button_states(self, active_button):
-        self.btn_full_accuracy.configure(fg_color="grey18")
+        # self.btn_full_accuracy.configure(fg_color="grey18")
         self.btn_measure_accuracy.configure(fg_color="grey18")
-        self.btn_word_typing.configure(fg_color="grey18")
+        # self.btn_word_typing.configure(fg_color="grey18")
 
         active_button.configure(fg_color=SELECTION_COLOR)
 

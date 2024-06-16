@@ -68,14 +68,15 @@ class MeasureAccuracyMode():
             self.gui.text_label.configure(text=self.correct_text)
             self.logger.info("START")
 
+            # --------------------------------------- ZADANIE 4 ------------------------------------------ #
+
             if not self.running:
                 self.running = True
-            # --------------------------------------- ZADANIE 4.1 ------------------------------------------ #
-            #
-            # Napisz tutaj kod który który pod zmienną:    self.calculate_stats_thread    zdefiniuje thread,
-            # który jako target przyjmuje funkcję:   self.calculate_stats
-            # Spraw żeby ten thread był daemon threadem i go uruchom.
-            #
+                self.calculate_stats_thread = threading.Thread(
+                    target=self.calculate_stats)
+                self.calculate_stats_thread.daemon = True
+                self.calculate_stats_thread.start()
+
             # -------------------------------------------------------------------------------------------- #
         except Exception as e:
             self.logger.error(f"Error starting thread: {e}")
@@ -103,13 +104,7 @@ class MeasureAccuracyMode():
 
             self.logger.debug(self.chars_typed)
 
-            # --------------------------------------- ZADANIE 3.1 ------------------------------------------ #
-            #
-            # Odkomentuj tę linię żeby przy każdym kliknięciu klawisza wywoływać funckję do sprawdzania statystyk
             # self.calculate_accuracy(self.gui.input_textbox.get(0.0, "end"))
-            #
-            # -------------------------------------------------------------------------------------------- #
-
         except Exception as e:
             self.logger.error(f"Error processing key press: {e}")
 
@@ -118,50 +113,49 @@ class MeasureAccuracyMode():
             start_time = time.time()
             while self.running:
                 time_elapsed = time.time() - start_time
-                if time_elapsed > 0:
-                    pass
-                    # --------------------------------------- ZADANIE 4.2 ------------------------------------------ #
+                if time_elapsed > 0:  # Avoid division by zero
+                    wpm = 60 * len(self.gui.input_textbox.get(
+                        0.0, "end").split()) / time_elapsed
+                    cps = self.chars_typed / time_elapsed
+                    cpm = cps * 60
+                    self.gui.speed_label.configure(
+                        text=f"WPM: {wpm:.2f}\nCPM: {cpm:.2f}\nCPS: {cps:.2f}")
+                    self.gui.accuracy_label.configure(
+                        text=f"Accuracy: {self.accuracy:.2f}%")
+                    self.gui.time_label.configure(
+                        text=f"Time elapsed: {time_elapsed: .1f} seconds.")
 
-                    # Napisz tutja kod który pod zmiennymi wpm (words per minute), cps(characters per second), cpm(characters per minute) policzy wartości tych statystyk
-                    # Nastepnie skonfiguruj widgety self.gui.speed_label, self.gui.accuracy_label, self.gui.time_label tak żeby wyświetlały te wartości
+                    if wpm > 50:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif wpm > 45:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif wpm > 40:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif wpm > 35:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.speed_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
 
-                    # --------------------------------------- ZADANIE 4.3 ------------------------------------------ #
-                    # Odkomentuj ten kod żeby dodać ładne kolori :)
-
-                    # if wpm > 50:
-                    #     self.gui.speed_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["great"])
-                    # elif wpm > 45:
-                    #     self.gui.speed_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["good"])
-                    # elif wpm > 40:
-                    #     self.gui.speed_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["average"])
-                    # elif wpm > 35:
-                    #     self.gui.speed_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
-                    # else:
-                    #     self.gui.speed_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
-
-                    # if self.accuracy > 95:
-                    #     self.gui.accuracy_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["great"])
-                    # elif self.accuracy > 90:
-                    #     self.gui.accuracy_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["good"])
-                    # elif self.accuracy > 80:
-                    #     self.gui.accuracy_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["average"])
-                    # elif self.accuracy > 70:
-                    #     self.gui.accuracy_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
-                    # else:
-                    #     self.gui.accuracy_label.configure(
-                    #         text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
-
-                    # -------------------------------------------------------------------------------------------- #
-
+                    if self.accuracy > 95:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["great"])
+                    elif self.accuracy > 90:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["good"])
+                    elif self.accuracy > 80:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["average"])
+                    elif self.accuracy > 70:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["bad"])
+                    else:
+                        self.gui.accuracy_label.configure(
+                            text_color=self.gui.GRADE_COLOR_PALLETE["worst"])
         except Exception as e:
             self.logger.error(f"Error calculating stats: {e}")
 
@@ -185,13 +179,14 @@ class MeasureAccuracyMode():
                 except IndexError:
                     incorrect_chars_typed += abs(len(user_word) - i)
 
-            # ---------------------------------------------------------------- ZADANIE 3.2 --------------------------------------------------------------------- #
+            # --------------------------------------- ZADANIE 2 ------------------------------------------ #
+            if correct_chars_typed:
+                self.accuracy = 100 * correct_chars_typed / \
+                    (correct_chars_typed + incorrect_chars_typed)
+            else:
+                self.accuracy = 0
+            # -------------------------------------------------------------------------------------------- #
 
-            # Na podstawie działania tej funkcji (funkcja w prostej pętli obliczna ilośc poprawnie napisanych liter w każdym słowie)
-            # następnie sumując je wszystkie do zmiennej correct_chars_typed) napisz kod który nada zmiennej:     self.accuracy
-            # wartość którą chcemy wyświetlić w aplikaacji. (Podpowiedź, dokładność = stosunek dobrze napisancych liter / stosunek wszystkich napisanych liter)
-
-            # ------------------------------------------------------------------------------------------------------------------------------------------------- #
             self.logger.debug(
                 f"Accuracy: {self.accuracy} %\n----------------------")
         except Exception as e:
