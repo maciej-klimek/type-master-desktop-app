@@ -50,8 +50,8 @@ class WordTypingMode:
                 target=self.gui.animation_box.start_game)
             game_thread.start()
 
-        self.gui.level_label.configure(
-            text="Level: 1 \nCorrect words: 0\nNext level: 0")
+        # self.gui.level_label.configure(
+        #     text="Level: 1 \nCorrect words: 0\nNext level: 0")
         self.gui.level_label.configure(fg_color='#71c788')
 
     def on_key_press(self, event):
@@ -112,7 +112,6 @@ class WordTypingMode:
         self.gui.input_textbox.bind("<Return>", self.on_start)
         self.gui.input_textbox.unbind("<KeyRelease>")
         self.reset_game_state()
-        self.gui.level_label.configure(fg_color='#71c788')
         self.logger.debug("RESET")
 
     def end_game(self):
