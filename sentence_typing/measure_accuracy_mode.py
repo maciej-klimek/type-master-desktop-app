@@ -70,13 +70,13 @@ class MeasureAccuracyMode():
 
             if not self.running:
                 self.running = True
-            # --------------------------------------- ZADANIE 4.1 ------------------------------------------ #
-            #
-            # Napisz tutaj kod który który pod zmienną:    self.calculate_stats_thread    zdefiniuje thread,
-            # który jako target przyjmuje funkcję:   self.calculate_stats
-            # Spraw żeby ten thread był daemon threadem i go uruchom.
-            #
-            # -------------------------------------------------------------------------------------------- #
+                # --------------------------------------- ZADANIE 4.1 ------------------------------------------ #
+                #
+                # Napisz tutaj kod (w tym ifie) który który pod zmienną:    self.calculate_stats_thread    zdefiniuje thread,
+                # który jako target przyjmuje funkcję:   self.calculate_stats
+                # Spraw żeby ten thread był daemon threadem i go uruchom.
+                #
+                # -------------------------------------------------------------------------------------------- #
         except Exception as e:
             self.logger.error(f"Error starting thread: {e}")
 
