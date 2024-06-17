@@ -1,25 +1,39 @@
 1. O jakie aspekty biblioteka customtkinter rozszerza podstawową wersje tkintera? (zaznacz wszystkie poprawne odpowiedzi)
-- Znacząco poprawia wydajność i szybkość ładowania widgetów
-- Szersze możliwości konfiguracji i dostosowywania widgetów [prawda]
-- Narzędzia do łatwiejszego zapewnienia responsywności w aplikacjach
-- Automatyczne dopasowanie wyglądu aplikacji do motywu systemu na którym aplikacja pracuje [prawda]
 
-Jakie są dostępne poziomu loggingu w pythonie?
-- DEBUG, INFO, ERROR, CRITICAL
-- DEBUG, MESSAGE, WARNING, ERROR, CRITICAL
-- DEBUG, INFO, WARNING, ERROR, CRITICAL
-- DEBUG, INFO, ERROR, CRITICAL, FATAL
+A. Znacząco poprawia wydajność i szybkość ładowania widgetów
+B. Szersze możliwości konfiguracji i dostosowywania widgetów [prawda]
+C. Narzędzia do łatwiejszego zapewnienia responsywności w aplikacjach
+D. Automatyczne dopasowanie wyglądu aplikacji do motywu systemu na którym aplikacja pracuje [prawda]
 
-Jaka jest podstawowa różnica między Daemon Thread a Non-Daemon Thread?
-- Daemon Thread automatycznie odzyskuje zasoby systemowe po zakończeniu, podczas gdy Non-daemon Thread wymaga ręcznego zwalniania zasobów przez programiste
-- Daemon Thread jest uruchamiany przez główny thread aplikacji, natomiast Non-Daemon Thread jest uruchamiany przez system operacyjny na poziomie jądra
-- Daemon Thread ma priorytet wyższy od Non-daemon Thread, dlatego jest używany do zadań wymagających natychmiastowej reakcji
-- Daemon Thread jest automatycznie kończony przy zamknięciu programu, Non-daemon Thread musi zakończyć swoje działanie, żeby program mógł się zamknąć [prawda]
 
-Zaznacz prawdziwe zdania charakteryzujące architekture modularną aplikacji:
-- Architekura modularna polega na podziele aplikacji na niezależne moduły, które mogą być rozwijane, testowane i wdrażane oddzielnie [prawda]
-- Architektura modularna znacząco utrudnia skalowanie projektu i dodawanie nowych funkcjonalności
-- Moduły aplikacji modulnych mogą być wielokrotnie wykorzystywane w różnych projektach [prawda]
-- Moduły w aplikacji modularnej, mimo że stanowią w pełni odrębne byty, muszą być zawsze uruchamiany jednocześnie w celu zapewnienia poprawnej synchronizacji
+2. Jakie są dostępne poziomu loggingu w pythonie?
 
+A. DEBUG, INFO, ERROR, CRITICAL
+B. DEBUG, MESSAGE, WARNING, ERROR, CRITICAL
+C. DEBUG, INFO, WARNING, ERROR, CRITICAL
+D. DEBUG, INFO, ERROR, CRITICAL, FATAL
+
+
+3. Jaka jest podstawowa różnica między Daemon Thread a Non-Daemon Thread?
+
+A. Daemon Thread automatycznie odzyskuje zasoby systemowe po zakończeniu, podczas gdy Non-daemon Thread wymaga ręcznego zwalniania zasobów przez programiste
+B. Daemon Thread jest uruchamiany przez główny thread aplikacji, natomiast Non-Daemon Thread jest uruchamiany przez system operacyjny na poziomie jądra
+C. Daemon Thread ma priorytet wyższy od Non-daemon Thread, dlatego jest używany do zadań wymagających natychmiastowej reakcji
+D. Daemon Thread jest automatycznie kończony przy zamknięciu programu, Non-daemon Thread musi zakończyć swoje działanie, żeby program mógł się zamknąć [prawda]
+
+
+4. Zaznacz prawdziwe zdania charakteryzujące architekture modularną aplikacji: (zaznacz wszystkie poprawne odpowiedzi)
+
+A. Architekura modularna polega na podziele aplikacji na niezależne moduły, które mogą być rozwijane, testowane i wdrażane oddzielnie [prawda]
+B. Architektura modularna znacząco utrudnia skalowanie projektu i dodawanie nowych funkcjonalności
+C. Moduły aplikacji modulnych mogą być wielokrotnie wykorzystywane w różnych projektach [prawda]
+D. Moduły w aplikacji modularnej, mimo że stanowią w pełni odrębne byty, muszą być zawsze uruchamiany jednocześnie w celu zapewnienia poprawnej synchronizacji
+
+
+5. Czym jest Circular Import:
+
+B. Jest to błąd, który powstaje na skutek próby zaimportowania modułu z innego package'u.
+A. Jest to sytuacja, w której dwa moduły próbują importować funkcje lub moduły z siebie nawzajem. [Prawda]
+C. Jest to technika programowania, która pozwala na zwielokrotnienie modularności w projektach.
+D. To sytuacja, w której moduł Pythona próbuje zaimportować sam siebie.
 
