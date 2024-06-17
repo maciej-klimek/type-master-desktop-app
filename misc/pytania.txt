@@ -1,4 +1,4 @@
-1. O jakie aspekty biblioteka customtkinter rozszerza podstawową wersje tkintera? (zaznacz wszystkie poprawne odpowiedzi)
+1. O jakie aspekty biblioteka customtkinter rozszerza podstawową wersję tkintera? (zaznacz wszystkie poprawne odpowiedzi)
 
 A. Znacząco poprawia wydajność i szybkość ładowania widgetów
 B. Szersze możliwości konfiguracji i dostosowywania widgetów [prawda]
@@ -10,7 +10,7 @@ D. Automatyczne dopasowanie wyglądu aplikacji do motywu systemu na którym apli
 
 A. DEBUG, INFO, ERROR, CRITICAL
 B. DEBUG, MESSAGE, WARNING, ERROR, CRITICAL
-C. DEBUG, INFO, WARNING, ERROR, CRITICAL
+C. DEBUG, INFO, WARNING, ERROR, CRITICAL [prawda]
 D. DEBUG, INFO, ERROR, CRITICAL, FATAL
 
 
@@ -35,5 +35,5 @@ D. Moduły w aplikacji modularnej, mimo że stanowią w pełni odrębne byty, mu
 B. Jest to błąd, który powstaje na skutek próby zaimportowania modułu z innego package'u.
 A. Jest to sytuacja, w której dwa moduły próbują importować funkcje lub moduły z siebie nawzajem. [Prawda]
 C. Jest to technika programowania, która pozwala na zwielokrotnienie modularności w projektach.
-D. To sytuacja, w której moduł Pythona próbuje zaimportować sam siebie.
+D. To sytuacja, w której moduł próbuje zaimportować sam siebie.
 
