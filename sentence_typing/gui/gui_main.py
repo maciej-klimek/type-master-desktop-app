@@ -31,7 +31,7 @@ class GUI(ctk.CTkFrame):
         self.create_widgets()
 
     def run(self):
-        self.main_frame.pack(expand=True)
+        self.main_frame.pack(expand=True, padx=200)
         self.stats_frame.pack(fill="x", side="left", padx=[50, 0])
         self.root.mainloop()
 

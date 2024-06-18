@@ -4,6 +4,7 @@ import random
 import logging
 import sqlite3
 from config import WORDS_PATH
+import platform
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -23,7 +24,10 @@ class AnimationBox(ctk.CTkLabel):
         self.word_moving_speed = 0.07
         self.word_generating_speed = 1500
         self.max_num_of_fallen_words = 5
-
+        
+        if platform.system() == "Darwin":
+            self.word_moving_speed == 0.2
+            print("MACOS")
         self.canvas = tk.Canvas(self.root, width=self.canvas_width,
                                 height=self.canvas_height, bg='#242424')
 

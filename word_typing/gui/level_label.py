@@ -7,7 +7,7 @@ class LevelLabel(ctk.CTkLabel):
         LevelLabel.configure(
             self,
             width=150,
-            text="Level: 1 \nCorrect words: 0\nNext level: 0",
+            text="Naciśnij enter\nżeby rozpocząć\ngrę!",
             font=("Cascadia Code Bold", 16),
             corner_radius=8,
             justify="left",
