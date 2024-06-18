@@ -41,7 +41,7 @@ class GUI(ctk.CTkFrame):
         bottom_frame.grid_columnconfigure(2, weight=0)
 
         self.title_label = TitleLabel(top_frame)
-        self.title_label.pack(pady=[0, 50])
+        self.title_label.pack(pady=[0, 20])
 
         self.animation_box = AnimationBox(
             top_frame, self.word_typing_mode_instance)
