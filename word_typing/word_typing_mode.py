@@ -1,6 +1,7 @@
 import logging
 import threading
 from word_typing.gui.gui_main import GUI
+import platform
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -20,6 +21,9 @@ class WordTypingMode:
         self.increment_of_next_level = 20
         self.level = 1
         self.word_speed_change_factor = 0.03
+        if platform.system() == "Darwin":
+            self.word_speed_change_factor == 0.1
+        
         self.word_generation_speed_change_factor = 200
 
         self.gui.input_textbox.bind("<KeyRelease>", self.on_key_press)
