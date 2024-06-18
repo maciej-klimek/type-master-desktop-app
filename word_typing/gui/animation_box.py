@@ -17,7 +17,7 @@ class AnimationBox(ctk.CTkLabel):
         self.root = root
         self.word_typing_mode = word_typing_mode_instance
         self.canvas_width = 900
-        self.canvas_height = 520
+        self.canvas_height = 500
         self.font_size = 20
         self.game_started = False
 
