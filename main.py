@@ -46,7 +46,7 @@ class MainMenu(ctk.CTkFrame):
         super().__init__(parent)
         self.root = parent
         self.root.title("TypeMaster")
-        self.root.geometry("1400x1000")
+        self.root.geometry("1400x1200")
         self.configure(fg_color=BACKGROUND_COLOR)
         self.settings_image = ctk.CTkImage(
             Image.open("images/settings_icon.png"))
@@ -97,7 +97,7 @@ class MainMenu(ctk.CTkFrame):
         self.destroy_mode_frame_content()
         title_label = ctk.CTkLabel(
             self.mode_frame, image=self.logo_image, text="")
-        title_label.pack(expand=True, pady=[0, 50], padx=100)
+        title_label.pack(expand=True, pady=[0, 0], padx=100)
 
     def open_full_accuracy_mode(self):
         self.update_button_states(self.btn_full_accuracy)
