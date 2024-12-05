@@ -3,6 +3,23 @@
 TypeMaster is an application designed to improve skills of efficient and fast typing.
 </p>
 
+---
+
+## Features
+
+- **Full Accuracy Typing Mode**: Type sentences with a focus on achieving 100% accuracy.  
+- **Measure Accuracy Typing Mode**: Measure and track your typing accuracy in real-time.  
+- **Walling Words Game**: A fun and dynamic game where words appear on the screen, and difficulty levels change as you progress.  
+
+---
+
+## Development
+
+This desktop app was built from scratch using **Python**. We utilized:  
+- **[customtkinter](https://github.com/TomSchimansky/CustomTkinter):** For creating a modern and clean user interface.  
+- **[Pillow](https://pillow.readthedocs.io/):** For displaying and handling some images in the application.  
+
+---
 
 ## Requirements:
 ```python
